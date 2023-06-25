@@ -1,0 +1,68 @@
+\selectlanguage *{english}
+\contentsline {chapter}{\numberline {1}Arbres binaires}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Définition formelle d’un arbre binaire}{3}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Arbres Binaires de Recherche}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Insertion et suppression}{9}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}1. Insertion et suppression dans un arbre binaire de recherche quelconque}{9}{subsection.2.1.1}%
+\contentsline {subsubsection}{Insertion}{9}{subsubsection*.3}%
+\contentsline {subsection}{\numberline {2.1.2}Suppression}{10}{subsection.2.1.2}%
+\contentsline {subsubsection}{Supprission de la valeur minimale}{10}{subsubsection*.4}%
+\contentsline {section}{\numberline {2.2}Requêtes dans un arbre binaire de recherche}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Recherche d’une clé}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}2.1 Recherche de la clé minimale / maximale}{11}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Recherche du prédécesseur / successeur}{12}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Complexité temporelle}{13}{subsection.2.2.4}%
+\contentsline {chapter}{\numberline {3}Programmation dynamique}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{15}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Un inconvénient de la programmation récursive}{15}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}Où est le problème ?}{16}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Une solution proposée par la programmation dynamique de type (Bottom UP)}{16}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Une solution proposée par la programmation dynamique de type (Top Down)}{18}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Programmation Dynamique et optimisation}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Démarche de résoluton}{21}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Exemple: Problème Sac à Dos.}{21}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}La solution dynamique avec la programmation dynamique par la méthode Bottom\_UP}{23}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}La solution dynamique avec la programmation dynamique par la méthode Top\_Down}{25}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}La solution linéaire avec la programmation gloutoune}{25}{subsection.4.2.3}%
+\contentsline {chapter}{\numberline {5}Les algorithmes gloutons}{29}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction}{29}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Définition: Algorithme Heuristiques :}{29}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Définition: Algorithme glouton}{29}{section.5.3}%
+\contentsline {chapter}{\numberline {6}TRAITEMENT DES IMAGES}{31}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Caractéristiques d’une image}{31}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Les pixels}{31}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Le format RGB}{33}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Transparence et Canal Alpha}{34}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}Chargement de l’image}{35}{subsection.6.1.4}%
+\contentsline {subsubsection}{La taille de l’image}{35}{subsubsection*.5}%
+\contentsline {subsubsection}{Affichage d’une image}{36}{subsubsection*.6}%
+\contentsline {subsubsection}{Recadrer l’image}{36}{subsubsection*.7}%
+\contentsline {subsection}{\numberline {6.1.5}Modification d’une image}{37}{subsection.6.1.5}%
+\contentsline {section}{\numberline {6.2}Traitements basiques de l’image}{38}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Inversion}{38}{subsection.6.2.1}%
+\contentsline {subsubsection}{Ajouter un réctangle}{39}{subsubsection*.8}%
+\contentsline {subsection}{\numberline {6.2.2}Retournement}{41}{subsection.6.2.2}%
+\contentsline {subsubsection}{Miroire}{42}{subsubsection*.9}%
+\contentsline {subsection}{\numberline {6.2.3}Passage en niveaux de gris}{43}{subsection.6.2.3}%
+\contentsline {subsubsection}{Modification du contraste}{44}{subsubsection*.10}%
+\contentsline {subsection}{\numberline {6.2.4}Histogramme d’une image}{45}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Seuillage fixe}{47}{subsection.6.2.5}%
+\contentsline {subsection}{\numberline {6.2.6}Rotation d’images}{48}{subsection.6.2.6}%
+\contentsline {section}{\numberline {6.3}Application de filtres}{50}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Flou ou Filtre moyenneur}{51}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Détection de contours}{52}{subsection.6.3.2}%
+\contentsline {subsubsection}{Concolution et filtre Moyenneur}{53}{subsubsection*.11}%
+\contentsline {subsection}{\numberline {6.3.3}Détection des contours}{53}{subsection.6.3.3}%
+\contentsline {chapter}{\numberline {7}Algorithme KNN: Cours}{57}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Classification supervisée}{57}{section.7.1}%
+\contentsline {section}{\numberline {7.2}La notion de distance:}{58}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Principe de l’algorithme}{58}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Mise en place de chaque étape}{58}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Mesure des distances}{58}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Déterminer les k plus proches voisins}{59}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Choisir la classe la plus fréquente}{60}{subsection.7.4.3}%
+\contentsline {subsection}{\numberline {7.4.4}Prédire la Sortie d’une nouvelle donnée}{60}{subsection.7.4.4}%
+\contentsline {subsection}{\numberline {7.4.5}Matrice de confusion}{60}{subsection.7.4.5}%
+\contentsline {chapter}{\numberline {8}Tp Iris}{61}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Question 1}{63}{section.8.1}%
+\contentsline {chapter}{Bibliography}{65}{chapter*.12}%

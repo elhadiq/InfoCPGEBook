@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>The Fjelstul World Cup Database &#8212; Informatique en CPGE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/SQL/fifa/README';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Arbres-binaires/Arbres.html">Arbres binaires</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ABR/ABR.html">Arbres Binaires de Recherche</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../dynamicProgramming/ProgrammationDynamique.html">Programmation dynamique</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../images/TRAITEMENT-DES-IMAGES.html">TRAITEMENT DES IMAGES</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Machine-Learning/KNN-Cours.html">Algorithme KNN: Cours</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../SQL.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../SQL1.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/SQL/fifa/README.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/notebooks/SQL/fifa/README.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The Fjelstul World Cup Database</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-database">Overview of the database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-data">Downloading the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-codebook">Downloading the codebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-license">The license</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-datasets">The datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources-and-replication-code">Data sources and replication code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-notes">Data notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-the-r-package">Installing the R package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citating-the-database">Citating the database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-problems">Reporting problems</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-fjelstul-world-cup-database">
+<h1>The Fjelstul World Cup Database<a class="headerlink" href="#the-fjelstul-world-cup-database" title="Permalink to this heading">#</a></h1>
+<p>The Fjelstul World Cup Database is a comprehensive database about the FIFA World Cup created by Joshua C. Fjelstul, Ph.D. that covers all <code class="docutils literal notranslate"><span class="pre">22</span></code> World Cup tournaments (1930-2022). The database includes <code class="docutils literal notranslate"><span class="pre">27</span></code> datasets (approximately 1.1 million data points) that cover all aspects of the World Cup.</p>
+<p>The database has been featured by <a class="reference external" href="https://www.washingtonpost.com/sports/2022/12/18/mbappe-messi-golden-boot-world-cup/">The Washington Post</a>,  <a class="reference external" href="https://fivethirtyeight.com/features/the-datasets-were-looking-at-this-week-10/">FiveThirtyEight</a>, <a class="reference external" href="https://themarkup.org/data-is-plural/2022/07/20/voting-laws-u-s-budget-appropriations-and-the-world-cup">The Markup</a>, <a class="reference external" href="https://www.data-is-plural.com/archive/2022-07-20-edition/">Data is Plural</a>, <a class="reference external" href="https://www.thetimes.co.uk/article/fifa-world-cup-history-statistics-goals-trophies-stadiums-teams-ptbt62xpq">The Times</a>, <a class="reference external" href="https://www.barrons.com/news/scorers-in-world-cup-football-01668769510">Agence France-Presse (AFP)</a>, <a class="reference external" href="https://www.barrons.com/news/scorers-in-world-cup-football-01668769510">Barron’s</a>, <a class="reference external" href="https://www.reddit.com/r/dataisbeautiful/comments/z9rt2b/oc_brazil_and_argentina_are_the_top_goalscorers/">Latinometrics</a>, <a class="reference external" href="https://www.hindustantimes.com/static-content/10m/fifa-world-cup/the-race-for-goals/index.html">Hindustan Times</a>, and <a class="reference external" href="https://s3.amazonaws.com/assets.datacamp.com/email/other/Exploring+World+Cup+Data+in+Power+BI+(1).pdf">DataCamp</a>.</p>
+<p>Users can use the database to calculate statistics about teams, players, managers, and referees. Users can also use the data to predict match results. With many units of analysis and opportunities for merging and reshaping data, the database is also an excellent resource for teaching data science skills.</p>
+<p>Here are some example visualizations that use the data:</p>
+<div>
+  <img src="https://github.com/jfjelstul/worldcup/blob/master/visualizations/match-results.png?raw=true" width="90%">
+</div>
+<div>
+  <img src="https://github.com/jfjelstul/worldcup/blob/master/visualizations/goals-by-European-teams.png?raw=true" width="70%">
+</div>
+<div>
+  <img src="https://github.com/jfjelstul/worldcup/blob/master/visualizations/goals-by-South-American-teams.png?raw=true" width="70%">
+</div>
+<section id="overview-of-the-database">
+<h2>Overview of the database<a class="headerlink" href="#overview-of-the-database" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">27</span></code> datasets in the database are organized into <code class="docutils literal notranslate"><span class="pre">5</span></code> groups:</p>
+<ol class="arabic simple">
+<li><p>A first group of datasets (containing <code class="docutils literal notranslate"><span class="pre">9</span></code> datasets) includes information about each of the <code class="docutils literal notranslate"><span class="pre">9</span></code> basic units of observation in the database: tournaments (<code class="docutils literal notranslate"><span class="pre">tournaments</span></code>), including the host country, the winner, the dates of the tournament, and information about the format of each tournament; the FIFA confederations (<code class="docutils literal notranslate"><span class="pre">confederations</span></code>); teams (<code class="docutils literal notranslate"><span class="pre">teams</span></code>); players (<code class="docutils literal notranslate"><span class="pre">players</span></code>); managers (<code class="docutils literal notranslate"><span class="pre">managers</span></code>), including their team and home country; referees (<code class="docutils literal notranslate"><span class="pre">referees</span></code>), including their home country and confederation; stadiums that have hosted World Cup matches (<code class="docutils literal notranslate"><span class="pre">stadiums</span></code>); matches (<code class="docutils literal notranslate"><span class="pre">matches</span></code>), including the stage of the tournament, the location of the match (country, city, stadium), the teams involved, and the result; and the individual awards that are handed out to players at each tournament (<code class="docutils literal notranslate"><span class="pre">awards</span></code>). Each of these units of observation has a unique ID number.</p></li>
+<li><p>A second group of datasets (containing <code class="docutils literal notranslate"><span class="pre">4</span></code> datasets) maps teams, players, managers, and referees to tournaments. There is a dataset about which teams qualified (<code class="docutils literal notranslate"><span class="pre">qualified</span> <span class="pre">teams</span></code>), which indicates how each team performed in the tournament; a dataset about squads (<code class="docutils literal notranslate"><span class="pre">squads</span></code>), which indicates the name, position, and shirt number of each player; a dataset about manager appointments (<code class="docutils literal notranslate"><span class="pre">manager_appointments</span></code>), which indicates the team and home country of each manager; and a dataset about referee appointments (<code class="docutils literal notranslate"><span class="pre">referee_appointments</span></code>), which indicates the home country and confederation of each referee.</p></li>
+<li><p>A third group of datasets (containing <code class="docutils literal notranslate"><span class="pre">4</span></code> datasets) maps teams, players, managers, and referees to individual matches. There are datasets about team appearances (<code class="docutils literal notranslate"><span class="pre">team_appearances</span></code>), player appearances (<code class="docutils literal notranslate"><span class="pre">player_apperances</span></code>), manager appearances (<code class="docutils literal notranslate"><span class="pre">manager</span> <span class="pre">appearances</span></code>), and referee appearances (<code class="docutils literal notranslate"><span class="pre">referee</span> <span class="pre">appearances</span></code>). Players who start a game on the bench but who are not substituted in appear in the <code class="docutils literal notranslate"><span class="pre">squads</span></code> dataset but not the <code class="docutils literal notranslate"><span class="pre">player_appearances</span></code> dataset.</p></li>
+<li><p>A fourth group of datasets (containing <code class="docutils literal notranslate"><span class="pre">4</span></code> datasets) cover in-match events, including: all goals (<code class="docutils literal notranslate"><span class="pre">goals</span></code>); all attempted penalty kicks in penalty shootouts and their outcomes (<code class="docutils literal notranslate"><span class="pre">penalty_kicks</span></code>); all bookings (<code class="docutils literal notranslate"><span class="pre">bookings</span></code>), including yellow cards and red cards; and all substitutions (<code class="docutils literal notranslate"><span class="pre">substitutions</span></code>). Each dataset includes the minute of the event and the player(s) and team involved. Each of these <code class="docutils literal notranslate"><span class="pre">4</span></code> types of in-match events has a unique ID number.</p></li>
+<li><p>A fifth group of datasets (containing <code class="docutils literal notranslate"><span class="pre">6</span></code> datasets) cover tournament-level attributes. There a dataset about host countries (<code class="docutils literal notranslate"><span class="pre">host_countries</span></code>), including the performance of each host country; a dataset about the stages in each tournament (<code class="docutils literal notranslate"><span class="pre">tournament_stages</span></code>), which records each stage of the tournament, the dates of the stage, and key features of the stage; a dataset about the groups in each group stage (<code class="docutils literal notranslate"><span class="pre">groups</span></code>), which indicates the name of each group and the number of teams in each group; a dataset about the final standings in each group (<code class="docutils literal notranslate"><span class="pre">group_standings</span></code>); a dataset about the final standings for each tournament (<code class="docutils literal notranslate"><span class="pre">tournament_standings</span></code>); and a dataset about all individual player awards handed out at each tournament (<code class="docutils literal notranslate"><span class="pre">award_winners</span></code>).</p></li>
+</ol>
+</section>
+<section id="downloading-the-data">
+<h2>Downloading the data<a class="headerlink" href="#downloading-the-data" title="Permalink to this heading">#</a></h2>
+<p>The Fjelstul World Cup Database is available via the <code class="docutils literal notranslate"><span class="pre">R</span></code> package <code class="docutils literal notranslate"><span class="pre">worldcup</span></code>, which you can install from this repository (instructions below). Note that this repository is structured as a repository for an <code class="docutils literal notranslate"><span class="pre">R</span></code> package. You can also download the database directly from this repository in <code class="docutils literal notranslate"><span class="pre">4</span></code> formats: an <code class="docutils literal notranslate"><span class="pre">.RData</span></code> version of the database is available in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder, a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> version is available in the <code class="docutils literal notranslate"><span class="pre">data-csv/</span></code> folder, a <code class="docutils literal notranslate"><span class="pre">.json</span></code> version is available in the <code class="docutils literal notranslate"><span class="pre">data-json/</span></code> folder, and a relational database version (<code class="docutils literal notranslate"><span class="pre">SQLite</span></code>) is available in the <code class="docutils literal notranslate"><span class="pre">data-sqlite/</span></code> folder.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.Rdata</span></code>, <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, and <code class="docutils literal notranslate"><span class="pre">.json</span></code> versions of the database are all identical except for the file format. These versions of the database are not technically relational because many tables already include variables that have been merged in from other tables for convenience (i.e., some data exists in multiple tables). The <code class="docutils literal notranslate"><span class="pre">SQLite</span></code> version includes all of the same variables, but variables from other tables are not already merged in. Dummy variables that are coded <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code> are converted to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> and <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Users can use the primary and foreign keys in the tables to merge in data from other tables. See the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file in the <code class="docutils literal notranslate"><span class="pre">data-sqlite/</span></code> folder for more details on using the relational database.</p>
+</section>
+<section id="downloading-the-codebook">
+<h2>Downloading the codebook<a class="headerlink" href="#downloading-the-codebook" title="Permalink to this heading">#</a></h2>
+<p>The codebook for the Fjelstul World Cup Database is available in <code class="docutils literal notranslate"><span class="pre">.pdf</span></code> format in the <code class="docutils literal notranslate"><span class="pre">codebook/pdf/</span></code> folder.
+The codebook is also available in <code class="docutils literal notranslate"><span class="pre">.csv</span></code> format in the <code class="docutils literal notranslate"><span class="pre">codebook/csv/</span></code> folder. There are <code class="docutils literal notranslate"><span class="pre">2</span></code> files: <code class="docutils literal notranslate"><span class="pre">datasets.csv</span></code>, which describes the contents of each dataset, and <code class="docutils literal notranslate"><span class="pre">variables.csv</span></code>, which describes each variable.</p>
+<p>The codebook for the database is also included in the <code class="docutils literal notranslate"><span class="pre">R</span></code> package: <code class="docutils literal notranslate"><span class="pre">worldcup::datasets</span></code> and <code class="docutils literal notranslate"><span class="pre">worldcup::variables</span></code>. The same information is also available as part of the <code class="docutils literal notranslate"><span class="pre">R</span></code> documentation for each dataset. For example, you can see the codebook for the <code class="docutils literal notranslate"><span class="pre">worldcup::matches</span></code> dataset by running <code class="docutils literal notranslate"><span class="pre">?worldcup::matches</span></code>.</p>
+</section>
+<section id="the-license">
+<h2>The license<a class="headerlink" href="#the-license" title="Permalink to this heading">#</a></h2>
+<p>The copyright for the original structure and organization of the Fjelstul World Cup Database and for all of the documentation and replication code for the database is owned by Joshua C. Fjelstul, Ph.D.</p>
+<p>The Fjelstul World Cup Database and the <code class="docutils literal notranslate"><span class="pre">worldcup</span></code> package are both published under a <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">CC-BY-SA 4.0 license</a>. This means that you can distribute, modify, and use all or part of the database for commercial or non-commercial purposes as long as (1) you provide proper attribution and (2) any new works you produce based on this database also carry the CC-BY-SA 4.0 license.</p>
+<p>To provide proper attribution, according to the CC-BY-SA 4.0 license, you must provide the name of the author (“Joshua C. Fjelstul, Ph.D.”), a notice that the database is copyrighted (”© 2022 Joshua C. Fjelstul, Ph.D.”), a link to the CC-BY-SA 4.0 license (<a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">https://creativecommons.org/licenses/by-sa/4.0/legalcode</a>), and a link to this repository (<a class="reference external" href="https://www.github.com/jfjelstul/worldcup">https://www.github.com/jfjelstul/worldcup</a>). You must also indicate any modifications you have made to the database.</p>
+<p>Consistent with the CC-BY-SA 4.0 license, I provide this database as-is and as-available, and make no representations or warranties of any kind concerning the database, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable.</p>
+</section>
+<section id="the-datasets">
+<h2>The datasets<a class="headerlink" href="#the-datasets" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tournaments</span></code>: This dataset records all World Cup tournaments. There is one observation per tournament. It includes the host of the tournament, the winner of the tournament, the start and end dates of the tournament, and information about the format of the tournament. There are <code class="docutils literal notranslate"><span class="pre">18</span></code> variables and <code class="docutils literal notranslate"><span class="pre">21</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">confederations</span></code>: This dataset records all FIFA confederations. There is one observation per confederation. There are <code class="docutils literal notranslate"><span class="pre">5</span></code> variables and <code class="docutils literal notranslate"><span class="pre">6</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">teams</span></code>: This dataset records all teams who have participated in a World Cup match. There is one observation per team. It includes the 3-letter ISO code for each country and information about each country’s national federation and FIFA confederation. There are <code class="docutils literal notranslate"><span class="pre">11</span></code> variables and <code class="docutils literal notranslate"><span class="pre">84</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">players</span></code>: This dataset records all players who have participated in a World Cup match, including players on the bench. There is one observation per player. It includes their name, their birth date, and a link to their Wikipedia page, if they have one. Note that it does not include their team, as a small number of players represent different countries in different tournaments. There are <code class="docutils literal notranslate"><span class="pre">12</span></code> variables and <code class="docutils literal notranslate"><span class="pre">7907</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">managers</span></code>: This dataset records all managers who have participated in a World Cup match. There is one observation per manager. It includes their name, their home country, and a link to their Wikipedia page, if they have one. There are <code class="docutils literal notranslate"><span class="pre">6</span></code> variables and <code class="docutils literal notranslate"><span class="pre">357</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">referees</span></code>: This dataset records all referees who have participated in a World Cup match. There is one observation per referee. It includes their name, their home country, their confederation, and a link to their Wikipedia page, if they have one. There are <code class="docutils literal notranslate"><span class="pre">9</span></code> variables and <code class="docutils literal notranslate"><span class="pre">380</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stadiums</span></code>: This dataset records all stadiums that have hosted a World Cup match. There is one observation per stadium. It includes the country and city of the stadium, the approximate capacity of the stadium, and the link to the Wikipedia pages for the city and the stadium. There are <code class="docutils literal notranslate"><span class="pre">8</span></code> variables and <code class="docutils literal notranslate"><span class="pre">185</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matches</span></code>: This dataset records all World Cup matches. There is one observation per match per tournament. It includes the home team, the away team, the date of the match, the country, city, and stadium that the match was played in, the final score, the score margin for each team, whether the match went to extra time, whether there was a penalty shootout, the number of penalties scored in the shootout (if applicable), the result of the match (home team win, away team win, draw, replayed), and the winner (if applicable). There are <code class="docutils literal notranslate"><span class="pre">37</span></code> variables and <code class="docutils literal notranslate"><span class="pre">900</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">awards</span></code>: This dataset records all individual awards that are handed out to players. There is one observation per award. It includes the name of the award, the year the award was first introduced, and a description of the award. There are <code class="docutils literal notranslate"><span class="pre">5</span></code> variables and <code class="docutils literal notranslate"><span class="pre">8</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qualified_teams</span></code>: This dataset records all qualified teams. There is one observation per team per tournament. It includes the tournament, the team, and the performance of each team (the furthest stage reached). There are <code class="docutils literal notranslate"><span class="pre">8</span></code> variables and <code class="docutils literal notranslate"><span class="pre">457</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">squads</span></code>: This dataset records the composition of each squad. There is one observation per player per team per tournament. It includes the position of each player, and the shirt number of each player (from 1954). There are <code class="docutils literal notranslate"><span class="pre">12</span></code> variables and <code class="docutils literal notranslate"><span class="pre">10142</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">manager_appointments</span></code>: This dataset records all manager appointments. There is one observation per manager per team per tournament. There are some teams that have co-managers. There are <code class="docutils literal notranslate"><span class="pre">10</span></code> variables and <code class="docutils literal notranslate"><span class="pre">469</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">referee_appointments</span></code>: This dataset records all referee appointments. There is one observation per referee per tournament. This dataset only includes the main referee, not assistant referees, fourth officials, or video assistant referees. There are <code class="docutils literal notranslate"><span class="pre">10</span></code> variables and <code class="docutils literal notranslate"><span class="pre">511</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">team_appearances</span></code>: This dataset records all team appearances. There is one observation per team per match per tournament. It includes whether the team is the home team or the away team, the number of goals for and against, the goal difference, whether there was a penalty shootout, penalties for and against (if applicable), and whether the team wins, loses, or draws. There are <code class="docutils literal notranslate"><span class="pre">36</span></code> variables and <code class="docutils literal notranslate"><span class="pre">1800</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">player_appearances</span></code>: This dataset records all player appearances since 1970. There is one observation per player per team per match per tournament. It includes players who play in the match, including players who are in the starting eleven and players who come in as substitutes. FIFA match reports do not include information about substitutions before 1970. There are <code class="docutils literal notranslate"><span class="pre">22</span></code> variables and <code class="docutils literal notranslate"><span class="pre">18623</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">manager_appearances</span></code>: This dataset records all manager appearances. There is one observation per manager per team per match per tournament. There are some teams that have co-managers. There are <code class="docutils literal notranslate"><span class="pre">17</span></code> variables and <code class="docutils literal notranslate"><span class="pre">1842</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">referee_appearances</span></code>: This dataset records all referee appearances. There is one observation per referee per match per tournament. There are <code class="docutils literal notranslate"><span class="pre">15</span></code> variables and <code class="docutils literal notranslate"><span class="pre">900</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">goals</span></code>: This dataset records all goals. There is one observation per goal. It indicates the team that scored the goal, player who scored the goal, the team of the player who scored the goal (to account for own goals), minute of the goal, and whether the goal was scored in the run of play by the opposition, was an own goal, or was a penalty. This dataset does not include converted penalties in a penalty shootout. There are <code class="docutils literal notranslate"><span class="pre">27</span></code> variables and <code class="docutils literal notranslate"><span class="pre">2548</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">penalty_kicks</span></code>: This dataset records all penalty kicks taken during penalty shootouts. There is one observation per penalty kick. This dataset does not include attempted penalty kicks during matches. It indicates minute of each kick, the player who took the kick, and whether the penalty was converted. There are <code class="docutils literal notranslate"><span class="pre">19</span></code> variables and <code class="docutils literal notranslate"><span class="pre">279</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bookings</span></code>: This dataset records all bookings, including yellow cards and red cards, since 1970. The modern system of yellow and red cards was introduced in 1970. There is one observation per booking. It indicates the minute of each booking, the player who was booked, whether the booking was a yellow card or a red card, whether the card was a second yellow card, and whether the player was sent off as a result of the booking. There are <code class="docutils literal notranslate"><span class="pre">26</span></code> variables and <code class="docutils literal notranslate"><span class="pre">2466</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">substitutions</span></code>: This dataset records all substitutions since 1970. FIFA match reports do not include information about substitutions before 1970. There is one observation per player per substitution. It indicates the minute of the substitution, the player who went off, and the player who came on. There are <code class="docutils literal notranslate"><span class="pre">24</span></code> variables and <code class="docutils literal notranslate"><span class="pre">6464</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">host_countries</span></code>: This dataset records all host countries. There is one observation per host country per tournament. A tournament can have multiple host countries. It indicates the performance of each host country (the furthest stage reached). There are <code class="docutils literal notranslate"><span class="pre">7</span></code> variables and <code class="docutils literal notranslate"><span class="pre">22</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tournament_stages</span></code>: This dataset records the stages in each tournament. There is one observation per stage per tournament. It indicates the name of the stage, whether the stage was a group stage or a knockout stage, if the stage was a group stage, whether there were unbalanced groups, the start and end dates of the stage, and how many matches there were in the stage, how many teams participated in each stage, how many games were scheduled, how many replays there were, how many walkovers there were, and how many playoffs there were. There are <code class="docutils literal notranslate"><span class="pre">16</span></code> observations and <code class="docutils literal notranslate"><span class="pre">107</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">groups</span></code>: This dataset records the names of the groups for each group stage. There is one observation per group per group stage per tournament. Some tournaments have multiple group stages. It indicates the stage, the name of the group, and how many teams were in the group. There are <code class="docutils literal notranslate"><span class="pre">7</span></code> variables and <code class="docutils literal notranslate"><span class="pre">117</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">group_standings</span></code>: This dataset records group standings for each group stage. There is one observation per team per group per group stage per tournament. Some tournaments have multiple group stages. It includes the final position of the team (factoring in tie breakers), the name of the team, the number of matches played, the number of wins, the number of losses, the number of draws, the number of goals for, the number of goals against, the goal difference, the total number of points earned, and whether the team advanced out of the group. There are <code class="docutils literal notranslate"><span class="pre">19</span></code> variables and <code class="docutils literal notranslate"><span class="pre">458</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tournament_standings</span></code>: This dataset records the final standings for each tournament. There is one observation per position per tournament. The top four teams are ranked. In most tournaments, these are the winner of the final, the loser of the final, the winner of the third-place match, and the loser of the third-place match. There are <code class="docutils literal notranslate"><span class="pre">7</span></code> variables and <code class="docutils literal notranslate"><span class="pre">84</span></code> observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">award_winners</span></code>: This dataset records all award winners. There is one observation per player per award per tournament. Some awards are shared by multiple players. It indicates the name of the award, the player(s) who won the award, the team of the player(s) who won the award, and whether the award was shared. There are <code class="docutils literal notranslate"><span class="pre">12</span></code> variables and <code class="docutils literal notranslate"><span class="pre">132</span></code> observations.</p></li>
+</ul>
+</section>
+<section id="data-sources-and-replication-code">
+<h2>Data sources and replication code<a class="headerlink" href="#data-sources-and-replication-code" title="Permalink to this heading">#</a></h2>
+<p>The data in the Fjelstul World Cup Database is coded based on information from Wikipedia. Some of this information is cross-referenced with the official FIFA match reports to check for accuracy. The Wikipedia pages used to code the data are archived in the <code class="docutils literal notranslate"><span class="pre">data-raw/</span></code> folder. Data on tournaments is hand-coded coded based on the pages in <code class="docutils literal notranslate"><span class="pre">data-raw/Wikipedia-tournament-pages/</span></code>, data on squads is machine-coded based on the pages in <code class="docutils literal notranslate"><span class="pre">data-raw/Wikipedia-squad-pages/</span></code>, data on matches is machine-coded based on the pages in <code class="docutils literal notranslate"><span class="pre">data-raw/Wikipedia-match-pages/</span></code>, and data on awards is hand-coded based on the page in <code class="docutils literal notranslate"><span class="pre">data-raw/Wikipedia-awards-page/</span></code>. The raw data for all of the datasets that are hand-coded are available in <code class="docutils literal notranslate"><span class="pre">data-raw/hand-coded-tables/</span></code>.</p>
+<p>The replication code for downloading the Wikipedia pages used to code the database is available in <code class="docutils literal notranslate"><span class="pre">data-raw/code/download-wikipedia-pages.R</span></code>. The replication code for extracting data from these pages is also available in <code class="docutils literal notranslate"><span class="pre">data-raw/code/</span></code>. The file <code class="docutils literal notranslate"><span class="pre">data-raw/code/parse-wikipedia-match-pages.R</span></code> extracts data from the match pages in <code class="docutils literal notranslate"><span class="pre">data-raw/Wikipedia-match-pages/</span></code> and the file <code class="docutils literal notranslate"><span class="pre">data-raw/code/parse-wikipedia-squad-pages.R</span></code> extracts data from the squad pages in <code class="docutils literal notranslate"><span class="pre">data-raw/Wikipedia-squad-pages/</span></code>. The working files produced by this code are stored in <code class="docutils literal notranslate"><span class="pre">data-raw/Wikipedia-data/</span></code>. The file <code class="docutils literal notranslate"><span class="pre">data-raw/code/build-database.R</span></code> compiles the database from the parsed data in <code class="docutils literal notranslate"><span class="pre">data-raw/Wikipedia-data/</span></code> and the hand-coded data in <code class="docutils literal notranslate"><span class="pre">data-raw/hand-coded-tables/</span></code>.</p>
+<p>The files <code class="docutils literal notranslate"><span class="pre">data-raw/code/build-database-csv.R</span></code>, <code class="docutils literal notranslate"><span class="pre">data-raw/code/build-database-json.R</span></code>, and <code class="docutils literal notranslate"><span class="pre">data-raw/code/build-database-sqlite.R</span></code> build the <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">.json</span></code>, and <code class="docutils literal notranslate"><span class="pre">SQLite</span></code> versions of the database, respectively.</p>
+<p>The replication code for the codebook is available in <code class="docutils literal notranslate"><span class="pre">codebook/code/</span></code>.</p>
+</section>
+<section id="data-notes">
+<h2>Data notes<a class="headerlink" href="#data-notes" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Player names.</strong> The official FIFA match reports include numerous errors relating to player names, including incorrect first names, misspellings, and incorrect, inconsistent, or out-dated transliterations. Wikipedia has cleaner names. Not all names are uniquely identifying. There can be multiple validate Wikipedia links for a player, due to redirects. I have standardized the links in the squad pages to each player has a unique link in the <code class="docutils literal notranslate"><span class="pre">players</span></code> dataset. Some players (and managers) are commonly known by a single name (e.g., Pelé, Ronaldinho, etc.). For these players, the <code class="docutils literal notranslate"><span class="pre">family_name</span></code> variable records the name they are commonly known by and the <code class="docutils literal notranslate"><span class="pre">given_name</span></code> variable is coded <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">applicable</span></code>.</p></li>
+<li><p><strong>Shirt numbers.</strong> Prior to 1950, players did not wear numbers on their shirts. In the 1950 World Cup, players had numbers, but they were not consistent from match to match.  Consequently, the <code class="docutils literal notranslate"><span class="pre">shirt_number</span></code> variable in the <code class="docutils literal notranslate"><span class="pre">squads</span></code> dataset is coded <code class="docutils literal notranslate"><span class="pre">0</span></code> for tournaments prior to the 1954 World Cup.</p></li>
+<li><p><strong>Substitutions.</strong> The data on substitutions starts in 1970. Prior to 1970, the match reports do not indicate substitutions. When comparing the data to the online versions of the FIFA match reports, note that the match reports sometimes incorrectly switch the player going off and the player coming on. In addition, sometimes the match reports will have the incorrect player coming on.</p></li>
+<li><p><strong>Time.</strong> In football matches, minute <code class="docutils literal notranslate"><span class="pre">1'</span></code> refers to the minute from <code class="docutils literal notranslate"><span class="pre">00:00</span></code> to <code class="docutils literal notranslate"><span class="pre">00:59</span></code>, minute <code class="docutils literal notranslate"><span class="pre">2'</span></code> refers to the minute from <code class="docutils literal notranslate"><span class="pre">01:00</span></code> to <code class="docutils literal notranslate"><span class="pre">01:59</span></code>, and so on. The first half goes from minute <code class="docutils literal notranslate"><span class="pre">1'</span></code> (<code class="docutils literal notranslate"><span class="pre">00:00</span></code> to <code class="docutils literal notranslate"><span class="pre">00:59</span></code>) to minute <code class="docutils literal notranslate"><span class="pre">45'</span></code> (<code class="docutils literal notranslate"><span class="pre">44:00</span></code> to <code class="docutils literal notranslate"><span class="pre">44:59</span></code>). The second half goes from minute <code class="docutils literal notranslate"><span class="pre">46'</span></code> (<code class="docutils literal notranslate"><span class="pre">45:00</span></code> to <code class="docutils literal notranslate"><span class="pre">45:59</span></code>) to minute <code class="docutils literal notranslate"><span class="pre">90'</span></code> (<code class="docutils literal notranslate"><span class="pre">89:00</span></code> to <code class="docutils literal notranslate"><span class="pre">89:59</span></code>). Thus, an event that occurs in minute <code class="docutils literal notranslate"><span class="pre">45'</span></code> is in the last minute of regulation time in the first half, not the first minute of regulation time in the second half, which would be minute <code class="docutils literal notranslate"><span class="pre">46'</span></code>. The first minute of stoppage time (as opposed to regulation time) in the first half is <code class="docutils literal notranslate"><span class="pre">45'</span> <span class="pre">+</span> <span class="pre">1'</span></code> and refers to the minute from <code class="docutils literal notranslate"><span class="pre">45:00</span></code> to <code class="docutils literal notranslate"><span class="pre">45:59</span></code> of the first half. The first minute of stoppage time in the second half is <code class="docutils literal notranslate"><span class="pre">90'</span> <span class="pre">+</span> <span class="pre">1'</span></code> and refers to the minute from <code class="docutils literal notranslate"><span class="pre">90:00</span></code> to <code class="docutils literal notranslate"><span class="pre">90:59</span></code> of the second half. The same pattern applies to the first half (<code class="docutils literal notranslate"><span class="pre">91'</span></code> to <code class="docutils literal notranslate"><span class="pre">105'</span></code>) and second half (<code class="docutils literal notranslate"><span class="pre">106'</span></code> to <code class="docutils literal notranslate"><span class="pre">120'</span></code>) of extra time. Times for penalties in a shootout are recorded as <code class="docutils literal notranslate"><span class="pre">AET</span></code>, which stands for “after extra time”. The <code class="docutils literal notranslate"><span class="pre">time</span></code> variable records the time of an event in this format. The <code class="docutils literal notranslate"><span class="pre">minute_regulation</span></code> variable records the regulation component of the time (the number before the <code class="docutils literal notranslate"><span class="pre">+</span></code>) and the <code class="docutils literal notranslate"><span class="pre">minute_stoppage</span></code> variable records the stoppage component of the time (the number after the <code class="docutils literal notranslate"><span class="pre">+</span></code>). For all events that occur in stoppage time, the <code class="docutils literal notranslate"><span class="pre">minute_regulation</span></code> variable will be <code class="docutils literal notranslate"><span class="pre">45</span></code>, <code class="docutils literal notranslate"><span class="pre">90</span></code>, <code class="docutils literal notranslate"><span class="pre">105</span></code>, or <code class="docutils literal notranslate"><span class="pre">120</span></code>, and the <code class="docutils literal notranslate"><span class="pre">minute_stoppage</span></code> variable will be greater than or equal to <code class="docutils literal notranslate"><span class="pre">1</span></code>. For all events that occur in regulation time, the <code class="docutils literal notranslate"><span class="pre">minute_stoppage</span></code> variable is coded <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><strong>Event times.</strong> For goals, substitutions, and bookings, I use the times recorded by Wikipedia. These times can differ slightly from the times in the online versions fo the official FIFA match reports, which sometimes contain inconsistencies are errors. It is common for the exact minute of in-match events to vary slightly between various online sources.</p></li>
+<li><p><strong>Tournament formats.</strong> The 1934 and 1938 tournaments did not include a group stage, so the <code class="docutils literal notranslate"><span class="pre">groups</span></code> dataset does not include observations for these tournaments. In the 1950 tournament, there was a first round and second round, which both had a group stage format. Through 1970, group names used numbers. The 1974, 1978, and 1982 tournaments had two group stages. The <code class="docutils literal notranslate"><span class="pre">groups</span></code> dataset includes the groups for both stages. Groups names in the first stage use numbers and group names in the second stage use letters. Since 1986, group names have used letters.</p></li>
+<li><p><strong>Country codes.</strong> The database uses ISO Alpha-3 country codes. The codes for the home countries are <code class="docutils literal notranslate"><span class="pre">ENG</span></code> for England, <code class="docutils literal notranslate"><span class="pre">WAL</span></code> for Wales, <code class="docutils literal notranslate"><span class="pre">SCO</span></code> for Scotland, and <code class="docutils literal notranslate"><span class="pre">NIR</span></code> for Northern Ireland. The codes for former countries are <code class="docutils literal notranslate"><span class="pre">SCG</span></code> for Serbia and Montenegro, <code class="docutils literal notranslate"><span class="pre">YUG</span></code> for Yugoslavia, <code class="docutils literal notranslate"><span class="pre">DDR</span></code> for East Germany, <code class="docutils literal notranslate"><span class="pre">CSK</span></code> for Czechoslovakia, and <code class="docutils literal notranslate"><span class="pre">SUN</span></code> for the Soviet Union. There is no ISO Alpha-3 code for the Dutch East Indies, so the database uses <code class="docutils literal notranslate"><span class="pre">IDN</span></code>, the code for Indonesia. West Germany uses the code for Germany, <code class="docutils literal notranslate"><span class="pre">DEU</span></code>, but is labeled as <code class="docutils literal notranslate"><span class="pre">West</span> <span class="pre">Germany</span></code>.</p></li>
+</ul>
+</section>
+<section id="installing-the-r-package">
+<h2>Installing the R package<a class="headerlink" href="#installing-the-r-package" title="Permalink to this heading">#</a></h2>
+<p>You can install the latest development version of the <code class="docutils literal notranslate"><span class="pre">worldcup</span></code> package from GitHub:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># install.packages(&quot;devtools&quot;)</span>
+<span class="n">devtools</span><span class="p">::</span><span class="n">install_github</span><span class="p">(</span><span class="s2">&quot;jfjelstul/worldcup&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="citating-the-database">
+<h2>Citating the database<a class="headerlink" href="#citating-the-database" title="Permalink to this heading">#</a></h2>
+<p>If you use the database in a paper or project, please cite the database:</p>
+<blockquote>
+<div><p>Fjelstul, Joshua C. “The Fjelstul World Cup Database v.1.0.” July 8, 2022. <a class="reference external" href="https://www.github.com/jfjelstul/worldcup">https://www.github.com/jfjelstul/worldcup</a>.</p>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">BibTeX</span></code> entry for the database is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Manual</span><span class="p">{</span><span class="n">Fjelstul2022</span><span class="p">,</span>
+  <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Fjelstul</span><span class="p">,</span> <span class="n">Joshua</span> <span class="n">C</span><span class="o">.</span><span class="p">},</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="p">{</span><span class="n">The</span> <span class="n">Fjelstul</span> <span class="n">World</span> <span class="n">Cup</span> <span class="n">Database</span> <span class="n">v</span><span class="mf">.1.0</span><span class="p">},</span>
+  <span class="n">year</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2022</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you access the database via the <code class="docutils literal notranslate"><span class="pre">worldcup</span></code> package, please also cite the package:</p>
+<blockquote>
+<div><p>Joshua C. Fjelstul (2022). worldcup: The Fjelstul World Cup Database. R package version 0.1.0.</p>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">BibTeX</span></code> entry for the <code class="docutils literal notranslate"><span class="pre">R</span></code> package is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Manual</span><span class="p">{,</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="p">{</span><span class="n">worldcup</span><span class="p">:</span> <span class="n">The</span> <span class="n">Fjelstul</span> <span class="n">World</span> <span class="n">Cup</span> <span class="n">Database</span><span class="p">},</span>
+  <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Fjelstul</span><span class="p">,</span> <span class="n">Joshua</span> <span class="n">C</span><span class="o">.</span><span class="p">},</span>
+  <span class="n">year</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2022</span><span class="p">},</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="p">{</span><span class="n">R</span> <span class="n">package</span> <span class="n">version</span> <span class="mf">0.1.0</span><span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="reporting-problems">
+<h2>Reporting problems<a class="headerlink" href="#reporting-problems" title="Permalink to this heading">#</a></h2>
+<p>If you notice an error in the data or a bug in the <code class="docutils literal notranslate"><span class="pre">R</span></code> package, please report it <a class="reference external" href="https://github.com/jfjelstul/worldcup/issues">here</a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/SQL/fifa"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-database">Overview of the database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-data">Downloading the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-codebook">Downloading the codebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-license">The license</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-datasets">The datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources-and-replication-code">Data sources and replication code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-notes">Data notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-the-r-package">Installing the R package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citating-the-database">Citating the database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-problems">Reporting problems</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By El Hadiq Zouhair
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

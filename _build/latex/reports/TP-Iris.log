@@ -1,0 +1,73 @@
+Traceback (most recent call last):
+  File "/home/zelhadiq/anaconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/zelhadiq/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/zelhadiq/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/zelhadiq/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/zelhadiq/anaconda3/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/zelhadiq/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 553, in async_execute
+    await self.async_execute_cell(
+  File "/home/zelhadiq/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/zelhadiq/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+data = sns.load_dataset('iris')
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mIncompleteRead[0m                            Traceback (most recent call last)
+[0;32m~/anaconda3/lib/python3.8/http/client.py[0m in [0;36m_readall_chunked[0;34m(self)[0m
+[1;32m    574[0m                     [0;32mbreak[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 575[0;31m                 [0mvalue[0m[0;34m.[0m[0mappend[0m[0;34m([0m[0mself[0m[0;34m.[0m[0m_safe_read[0m[0;34m([0m[0mchunk_left[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    576[0m                 [0mself[0m[0;34m.[0m[0mchunk_left[0m [0;34m=[0m [0;36m0[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.8/http/client.py[0m in [0;36m_safe_read[0;34m(self, amt)[0m
+[1;32m    613[0m         [0;32mif[0m [0mlen[0m[0;34m([0m[0mdata[0m[0;34m)[0m [0;34m<[0m [0mamt[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 614[0;31m             [0;32mraise[0m [0mIncompleteRead[0m[0;34m([0m[0mdata[0m[0;34m,[0m [0mamt[0m[0;34m-[0m[0mlen[0m[0;34m([0m[0mdata[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    615[0m         [0;32mreturn[0m [0mdata[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mIncompleteRead[0m: IncompleteRead(27352 bytes read, 4150 more expected)
+
+During handling of the above exception, another exception occurred:
+
+[0;31mIncompleteRead[0m                            Traceback (most recent call last)
+[0;32m<ipython-input-2-466891573b8e>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mdata[0m [0;34m=[0m [0msns[0m[0;34m.[0m[0mload_dataset[0m[0;34m([0m[0;34m'iris'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/anaconda3/lib/python3.8/site-packages/seaborn/utils.py[0m in [0;36mload_dataset[0;34m(name, cache, data_home, **kws)[0m
+[1;32m    483[0m                                   os.path.basename(full_path))
+[1;32m    484[0m         [0;32mif[0m [0;32mnot[0m [0mos[0m[0;34m.[0m[0mpath[0m[0;34m.[0m[0mexists[0m[0;34m([0m[0mcache_path[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 485[0;31m             [0;32mif[0m [0mname[0m [0;32mnot[0m [0;32min[0m [0mget_dataset_names[0m[0;34m([0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    486[0m                 [0;32mraise[0m [0mValueError[0m[0;34m([0m[0;34mf"'{name}' is not one of the example datasets."[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    487[0m             [0murlretrieve[0m[0;34m([0m[0mfull_path[0m[0;34m,[0m [0mcache_path[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.8/site-packages/seaborn/utils.py[0m in [0;36mget_dataset_names[0;34m()[0m
+[1;32m    418[0m     [0murl[0m [0;34m=[0m [0;34m"https://github.com/mwaskom/seaborn-data"[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    419[0m     [0;32mwith[0m [0murlopen[0m[0;34m([0m[0murl[0m[0;34m)[0m [0;32mas[0m [0mresp[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 420[0;31m         [0mhtml[0m [0;34m=[0m [0mresp[0m[0;34m.[0m[0mread[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    421[0m [0;34m[0m[0m
+[1;32m    422[0m     [0mpat[0m [0;34m=[0m [0;34mr"/mwaskom/seaborn-data/blob/master/(\w*).csv"[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.8/http/client.py[0m in [0;36mread[0;34m(self, amt)[0m
+[1;32m    463[0m [0;34m[0m[0m
+[1;32m    464[0m             [0;32mif[0m [0mself[0m[0;34m.[0m[0mchunked[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 465[0;31m                 [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_readall_chunked[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    466[0m [0;34m[0m[0m
+[1;32m    467[0m             [0;32mif[0m [0mself[0m[0;34m.[0m[0mlength[0m [0;32mis[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.8/http/client.py[0m in [0;36m_readall_chunked[0;34m(self)[0m
+[1;32m    577[0m             [0;32mreturn[0m [0;34mb''[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mvalue[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    578[0m         [0;32mexcept[0m [0mIncompleteRead[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 579[0;31m             [0;32mraise[0m [0mIncompleteRead[0m[0;34m([0m[0;34mb''[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mvalue[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    580[0m [0;34m[0m[0m
+[1;32m    581[0m     [0;32mdef[0m [0m_readinto_chunked[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mb[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mIncompleteRead[0m: IncompleteRead(159152 bytes read)
+IncompleteRead: IncompleteRead(159152 bytes read)
+

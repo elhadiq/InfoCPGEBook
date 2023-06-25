@@ -1,0 +1,765 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Algorithme KNN: Cours &#8212; Informatique en CPGE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Machine-Learning/KNN-Cours';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tp Iris" href="TP-Iris.html" />
+    <link rel="prev" title="TRAITEMENT DES IMAGES" href="../images/TRAITEMENT-DES-IMAGES.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Arbres-binaires/Arbres.html">Arbres binaires</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ABR/ABR.html">Arbres Binaires de Recherche</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamicProgramming/ProgrammationDynamique.html">Programmation dynamique</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../images/TRAITEMENT-DES-IMAGES.html">TRAITEMENT DES IMAGES</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Algorithme KNN: Cours</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="TP-Iris.html">Tp Iris</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/SQL.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../SQL/SQL1.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Machine-Learning/KNN-Cours.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/Machine-Learning/KNN-Cours.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Algorithme KNN: Cours</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-supervisee">Classification supervisée</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-notion-de-distance">La notion de distance:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principe-de-lalgorithme">Principe de l’algorithme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mise-en-place-de-chaque-etape">Mise en place de chaque étape</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mesure-des-distances">Mesure des distances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determiner-les-k-plus-proches-voisins">Déterminer les k plus proches voisins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choisir-la-classe-la-plus-frequente">Choisir la classe la plus fréquente</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predire-la-sortie-d-une-nouvelle-donnee">Prédire la Sortie d’une nouvelle donnée</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrice-de-confusion">Matrice de confusion</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#https://www.youtube.com/watch?v=0p0o5cmgLdE</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dans ce chapitre, on voit deux algorithmes pour l’intelligence artificielle : les k plus
+proches voisins (KNN k nearest neighbors) et les k-moyennes (k means).</p>
+<section class="tex2jax_ignore mathjax_ignore" id="algorithme-knn-cours">
+<h1>Algorithme KNN: Cours<a class="headerlink" href="#algorithme-knn-cours" title="Permalink to this heading">#</a></h1>
+<section id="classification-supervisee">
+<h2>Classification supervisée<a class="headerlink" href="#classification-supervisee" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>On considère le problème suivant : on dispose N objets sur lesquels on a mesuré différentes valeurs.<br />
+Les mêmes mesures ont été faites sur chacun des objets.</p></li>
+<li><p>La valeur de N est très grande.</p></li>
+<li><p>Ces objets se répartissent selon T classes, avec T petit. On sait dans quel classe va chaque objet que l’on a mesuré.</p></li>
+<li><p>Maintenant, on ajoute un nouvel objet sur lequel on a fait les mêmes mesures.</p></li>
+<li><p>On souhaite lui associer une classe.</p></li>
+<li><p>De quelle classe est-il le plus proche ?</p></li>
+</ul>
+<p>On parle ainsi <strong>D’APPRENTISSAGE SUPERVISÉ</strong> . En effet, on apprend sur un jeu des données déjà classées comment classer les nouvelles données.</p>
+<p><em>Exemple 1.</em></p>
+<ul class="simple">
+<li><p>Ce type d’algorithme est très utilisé en intelligence artificielle particulièrement dans le commerce en ligne.</p></li>
+<li><p>On a des informations sur N personnes (âge, sexe, habitude de navigation, etc.). On a classé leurs centres d’intérêts selon T types.</p></li>
+<li><p>On peut alors proposer automatiquement à un nouvel individu des publicités adap-
+tées en le classant automatiquement.</p></li>
+</ul>
+<p><em>Exemple 2.</em></p>
+<ul class="simple">
+<li><p>Pour faire des diagnostics automatiques, On dispose de mesures médicales sur N individus pour lesquels on sait si il y a ou pas une tumeur cancéreuse, c’-à-d que l’on a répartis dans deux classes : malade / sain.</p></li>
+<li><p>À partir de ces données, on peut déterminer automatiquement si un individu doit être considéré comme malade ou sain.</p></li>
+</ul>
+</section>
+<section id="la-notion-de-distance">
+<h2>La notion de distance:<a class="headerlink" href="#la-notion-de-distance" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Pour donner un sens à la classe la plus proche, cela suppose a minima de choisir une manière de mesurer les écarts entre les objets, c-à-d d’avoir une distance sur les mesures associées à aux objets.</p></li>
+<li><p>Cela n’est pas du tout évident. D’autant plus que les mesures peuvent prendre
+diverses formes.</p></li>
+<li><p>Le choix de la distance est donc critique pour la classification.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span><span class="o">=</span><span class="k">lambda</span> <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)])</span>
+<span class="n">d2</span><span class="o">=</span><span class="k">lambda</span> <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">([(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)]))</span>
+<span class="n">d_inf</span><span class="o">=</span><span class="k">lambda</span> <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">:</span> <span class="nb">max</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)])</span>
+<span class="n">d2_np</span><span class="o">=</span><span class="k">lambda</span> <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">((</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">d1_np</span><span class="o">=</span><span class="k">lambda</span> <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">))</span>
+<span class="n">d_inf_np</span><span class="o">=</span><span class="k">lambda</span> <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="principe-de-lalgorithme">
+<h2>Principe de l’algorithme<a class="headerlink" href="#principe-de-lalgorithme" title="Permalink to this heading">#</a></h2>
+<p><strong>Mathématiquement</strong>,</p>
+<ul class="simple">
+<li><p>On dispose donc d’un ensemble <span class="math notranslate nohighlight">\(E\)</span> assez complexe (l’ensemble des mesures), <span class="math notranslate nohighlight">\(E\)</span> est muni d’une distance <span class="math notranslate nohighlight">\(d\)</span>.</p></li>
+<li><p>On dispose d’un ensemble C de classe de cardinal T .</p></li>
+<li><p>On dispose donc de N éléments de <span class="math notranslate nohighlight">\(E \times C\)</span> (les mesures faites sur les objets et les classes associées). On les notes <span class="math notranslate nohighlight">\((x_j , c_j)_{j\in [1, N]}\)</span> .</p></li>
+<li><p>Ainsi, <span class="math notranslate nohighlight">\(x_j\)</span> est la liste des mesures faites sur l’objet <span class="math notranslate nohighlight">\(j\)</span>, et <span class="math notranslate nohighlight">\(c_j\)</span> la classe associée.</p></li>
+<li><p><strong>Problème</strong> On considère de plus un élément y de E, non classé et on veut lui associer une classe.</p></li>
+</ul>
+<p><strong>Exemple :</strong>
+Comme problème jouet, on considère donc que <span class="math notranslate nohighlight">\(E = \mathbb{R}^n\)</span> et que l’on prend la distance
+euclidienne.</p>
+<p>L’algorithme des KNN consiste à :</p>
+<ul class="simple">
+<li><p>mesurer les distance <span class="math notranslate nohighlight">\(d(y, x_j )\)</span> pour <span class="math notranslate nohighlight">\(j ∈ [|1, N|]\)</span>,</p></li>
+<li><p>déterminer les k plus proches voisins de y. Les k éléments les plus proches de
+y sont notés : <span class="math notranslate nohighlight">\(x_{i_1} , x_{i_2} , . . . , x_{i_k}\)</span> .</p></li>
+<li><p>Choisir pour classe de y la classe la plus fréquente parmi celles de <span class="math notranslate nohighlight">\((x_{i_1} , x_{i_2} , . . . , x_{i_k} )\)</span></p></li>
+</ul>
+<p>Le choix du paramètre k (nombre de voisins que l’on prend en compte) est critique.<br />
+Il n’est pas facile de régler ce paramètre et de l’interpréter.<br />
+D’autre part, on peut avoir plusieurs classes avec le même effectif parmi les k voisins.<br />
+Dans ce cas, l’algorithme ne permet pas de conclure et on attribue généralement arbitrairement une classe au nouvel objet y.</p>
+</section>
+<section id="mise-en-place-de-chaque-etape">
+<h2>Mise en place de chaque étape<a class="headerlink" href="#mise-en-place-de-chaque-etape" title="Permalink to this heading">#</a></h2>
+<section id="mesure-des-distances">
+<h3>Mesure des distances<a class="headerlink" href="#mesure-des-distances" title="Permalink to this heading">#</a></h3>
+<p>On commence donc par créer une liste des distances : <span class="math notranslate nohighlight">\(d(y, x_j )\)</span> pour <span class="math notranslate nohighlight">\(j \in [[1, N]]\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Distances</span><span class="p">(</span><span class="n">y</span> <span class="p">,</span><span class="n">LearningData</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="n">d2</span><span class="p">)</span> <span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    entrée :</span>
+<span class="sd">        lX = liste d&#39;objets ( é l é ment de R^n) de longueur N</span>
+<span class="sd">        y = objet ( é l é ment de R^n)</span>
+<span class="sd">        on dispose d&#39;une fonction d</span>
+<span class="sd">        qui mesure la distance entre objets</span>
+<span class="sd">    sortie :</span>
+<span class="sd">        lD = liste de float= liste des distances d(y,xk ) pour k dans [|1 , N |]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">d</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">LearningData</span><span class="p">]</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="determiner-les-k-plus-proches-voisins">
+<h3>Déterminer les k plus proches voisins<a class="headerlink" href="#determiner-les-k-plus-proches-voisins" title="Permalink to this heading">#</a></h3>
+<p>Ensuite, il s’agit de déterminer les k plus proches voisins.<br />
+Pour cela, on se contente d’utiliser l’algorithme de tri rapide en etulisant la fonction <strong>sorted</strong>.</p>
+<p>Ici, on voit que l’on veut les indices des éléments les plus proches, pas les valeurs.<br />
+En effet, ce n’est pas trier les distances qui nous intéressent mais trier les points.<br />
+C’est pour cette raison nous n’allos pas utiliser <strong>sorted</strong> directement sur les distances mais nou allons utiliser la fonction <strong>np.argsort</strong> qui retourne la liste des indices des elements qui rendent la liste des distances une liste triée.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Exemple </span>
+<span class="n">distances</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mf">0.3</span><span class="p">]</span>
+<span class="n">indices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;les distances: &quot;</span><span class="p">,</span><span class="n">distances</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;les indices: &quot;</span><span class="p">,</span><span class="n">indices</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> est l&#39;indice de </span><span class="si">{}</span><span class="s2"> dans la liste distances, ce qui représente la distance minimale,</span><span class="se">\n</span><span class="s2">aisni </span><span class="si">{}</span><span class="s2"> est l&#39;indice de  la distance maximale qui est </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">distances</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span><span class="n">indices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">distances</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>les distances:  [5, 10, 9, 11, 0.3]
+les indices:  [4 0 2 1 3]
+4 est l&#39;indice de 0.3 dans la liste distances, ce qui représente la distance minimale,
+aisni 3 est l&#39;indice de  la distance maximale qui est 11
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">KNN</span><span class="p">(</span><span class="n">Ditanceslist</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    entrée :</span>
+<span class="sd">            Ditanceslist = liste de float</span>
+<span class="sd">               = liste des distances entre l&#39;objet à placer </span>
+<span class="sd">               y et chacun des objets de la liste d&#39;apprentissages</span>
+<span class="sd">            k = int = nombre de voisins à prendre en compte </span>
+<span class="sd">    sortie : lKNN = liste de int de longueur K</span>
+<span class="sd">      = liste des indices des K plus proches voisins .</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">Ditanceslist</span><span class="p">)[:</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">KNN_version2</span><span class="p">(</span><span class="n">Ditanceslist</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">triee</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">Ditanceslist</span><span class="p">),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">triee</span><span class="p">][:</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="choisir-la-classe-la-plus-frequente">
+<h3>Choisir la classe la plus fréquente<a class="headerlink" href="#choisir-la-classe-la-plus-frequente" title="Permalink to this heading">#</a></h3>
+<p>Pour déterminer la classe la plus fréquente, il faut compter combien de fois est présente chaque classe.</p>
+<p>Pour cela, on parcourt les k plus proches avec un compteur de longueur T (le nombre de classe).</p>
+<p>Pour chaque élément lu, on incrémente le compteur correspondant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Compter</span><span class="p">(</span><span class="n">TargetValues</span><span class="p">):</span>
+    <span class="n">compteur</span><span class="o">=</span><span class="p">{}</span>
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">TargetValues</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">e</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">compteur</span><span class="p">:</span>
+            <span class="n">compteur</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">compteur</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">compteur</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ensuite, un simple algorithme de recherche de maximum donne la classe la plus fréquente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Plus_commun</span><span class="p">(</span><span class="n">compteur</span><span class="p">):</span>
+    <span class="nb">max</span><span class="p">(</span><span class="n">compteur</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span><span class="n">compteur</span><span class="p">[</span><span class="n">e</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="predire-la-sortie-d-une-nouvelle-donnee">
+<h3>Prédire la Sortie d’une nouvelle donnée<a class="headerlink" href="#predire-la-sortie-d-une-nouvelle-donnee" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">LearningData</span><span class="p">,</span><span class="n">LearningTarget</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="n">d2_np</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">11</span><span class="p">):</span>
+    <span class="n">Ditanceslist</span><span class="o">=</span><span class="n">distances</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">LearningData</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">voisins</span><span class="o">=</span><span class="n">KNN</span><span class="p">(</span><span class="n">Ditanceslist</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Plus_commun</span><span class="p">(</span><span class="n">Compter</span><span class="p">(</span><span class="n">LearningTarget</span><span class="p">[</span><span class="n">voisins</span><span class="p">]))</span>
+    <span class="c1">#return Counter(LearningTarget[voisins]).most_common()[0]</span>
+    <span class="c1">#</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="matrice-de-confusion">
+<h3>Matrice de confusion<a class="headerlink" href="#matrice-de-confusion" title="Permalink to this heading">#</a></h3>
+<p>La matrice de confusion permet de mesurer la qualité du système de classification.<br />
+Pour tester la qualité, on prend M objets dont on connaît la classification.<br />
+Cette classification est qualifiée de certaine.<br />
+On applique l’algorithme à chacun de ses M objets et on note la classification obtenue (dite classification estimée).<br />
+On met ces résultats dans une matrice : chaque ligne de la matrice correspond à une classe certaine, chaque colonne a une classe estimée. Ainsi ligne i et colonne j on met le nombre d’éléments qui ont été classifiée dans la classe j alors qu’ils sont dans la classe i.<br />
+Si la classification était parfaite, alors seule la diagonale aurait des éléments non nuls.<br />
+On considère qu’une classification est de qualité lorsque chaque ligne contient 95% de ses valeurs sur l’élément diagonal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ConfusionMatrix</span><span class="p">(</span><span class="n">TestData</span><span class="p">,</span><span class="n">TestTarget</span><span class="p">,</span><span class="n">model</span><span class="p">):</span>
+    <span class="n">LearningData</span><span class="p">,</span><span class="n">LearningTarget</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">model</span>
+    <span class="n">types</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">TestTarget</span><span class="p">))</span>
+    <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)</span>
+    <span class="n">matrice</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">TestData</span><span class="p">)):</span>
+        <span class="n">p</span><span class="o">=</span><span class="n">predict</span><span class="p">(</span><span class="n">TestData</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">LearningData</span><span class="p">,</span><span class="n">LearningTarget</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">matrice</span><span class="p">[</span><span class="n">TestTarget</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">p</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/Machine-Learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../images/TRAITEMENT-DES-IMAGES.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">TRAITEMENT DES IMAGES</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="TP-Iris.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tp Iris</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-supervisee">Classification supervisée</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-notion-de-distance">La notion de distance:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principe-de-lalgorithme">Principe de l’algorithme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mise-en-place-de-chaque-etape">Mise en place de chaque étape</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mesure-des-distances">Mesure des distances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determiner-les-k-plus-proches-voisins">Déterminer les k plus proches voisins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choisir-la-classe-la-plus-frequente">Choisir la classe la plus fréquente</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predire-la-sortie-d-une-nouvelle-donnee">Prédire la Sortie d’une nouvelle donnée</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrice-de-confusion">Matrice de confusion</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By El Hadiq Zouhair
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

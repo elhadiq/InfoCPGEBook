@@ -1,9 +1,17 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks/notebooks1
-- file: markdown-notebooks
+- file: notebooks/Arbres-binaires/Arbres
+  sections:
+  - file: notebooks/ABR/ABR
+- file: notebooks/dynamicProgramming/ProgrammationDynamique
+  sections:
+  - file: notebooks/dynamicProgramming/glouton
+- file: notebooks/images/TRAITEMENT-DES-IMAGES
+- file: notebooks/Machine-Learning/KNN-Cours
+  sections:
+  - file: notebooks/Machine-Learning/TP-Iris
+
+- file : notebooks/SQL/SQL
+- file: notebooks/SQL/SQL1
+  
