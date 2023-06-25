@@ -1,0 +1,953 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Arbres Binaires de Recherche &#8212; Informatique en CPGE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/ABR/ABR';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Programmation dynamique" href="../dynamicProgramming/ProgrammationDynamique.html" />
+    <link rel="prev" title="Arbres binaires" href="../Arbres-binaires/Arbres.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Arbres-binaires/Arbres.html">Arbres binaires</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Arbres Binaires de Recherche</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamicProgramming/ProgrammationDynamique.html">Programmation dynamique</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../images/TRAITEMENT-DES-IMAGES.html">TRAITEMENT DES IMAGES</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Machine-Learning/KNN-Cours.html">Algorithme KNN: Cours</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../SQL/SQL.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../SQL/SQL1.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/ABR/ABR.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/ABR/ABR.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Arbres Binaires de Recherche</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-et-suppression">Insertion et suppression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-et-suppression-dans-un-arbre-binaire-de-recherche-quelconque">1. Insertion et suppression dans un arbre binaire de recherche quelconque</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion">Insertion</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression">Suppression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#supprission-de-la-valeur-minimale">Supprission de la valeur minimale</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-dans-un-arbre-binaire-de-recherche">Requêtes dans un arbre binaire de recherche</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recherche-dune-cle">Recherche d’une clé</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recherche-de-la-cle-minimale-maximale">2.1 Recherche de la clé minimale / maximale</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recherche-du-predecesseur-successeur">Recherche du prédécesseur / successeur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complexite-temporelle">Complexité temporelle</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="arbres-binaires-de-recherche">
+<h1>Arbres Binaires de Recherche<a class="headerlink" href="#arbres-binaires-de-recherche" title="Permalink to this heading">#</a></h1>
+<div class="alert alert-info" role="alert"> 
+<p><strong>Indication</strong>:  Concernant les cellules qui contiens des théorèmes enlever le commenatire (&lt; !– – &gt;) pour visualiser la preuve apres avoir essayer le prouvé vous meme  </div></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>Un arbre binaire de recherche <span id="id1">[<a class="reference internal" href="../../intro.html#id7" title="Jean-Pierre-Becirspahic. Arbres binaires. https://info-llg.fr/option-mp/pdf/01.arbres.pdf. Accessed: 2010-09-30.">Jean-Pierre-Becirspahic., n.d.</a>]</span> (en abrégé : ABR) permet l’implémentation sous forme d’arbre binaire de certaines structures de données stockant des éléments formés d’une clé et d’une valeur, tels les dictionnaires 7.<br>
+Nous allons donc considérer un ensemble ordonné de clés <span class="math notranslate nohighlight">\(C\)</span> ainsi qu’un ensemble de valeurs <span class="math notranslate nohighlight">\(V\)</span>, et utiliser des arbres binaires étiquetés par <span class="math notranslate nohighlight">\(E = C × V.\)</span><br>
+Les arbre binaire de recherche supportent nombre d’opérations qu’on utilise dans les structures de données, en particulier :<br></p>
+<ul class="simple">
+<li><p>la recherche d’un valeur associée à une clé donnée ;</p></li>
+<li><p>la recherche de la valeur associée à la clé maximale (ou minimale) ;</p></li>
+<li><p>la recherche du successeur d’une clé c, c’est à dire la valeur associée à la plus petite des clés strictement supérieures à c ;</p></li>
+<li><p>la recherche du prédécesseur d’une clé ;</p></li>
+<li><p>et bien sûr l’insertion ou la suppression d’un nouveau couple clé/valeur.</p></li>
+</ul>
+<p><img alt="abr.png" src="../../_images/abr.png" /></p>
+<p>Figure 1 – Un exemple d’arbre binaire de recherche (seules les clés ont été représentées)</p>
+<p><strong>Définition.</strong><br>
+un arbre binaire <span class="math notranslate nohighlight">\(A\)</span> est un arbre binaire de recherche s’il est vide ou égal à <span class="math notranslate nohighlight">\([(c,v),Fg, Fd]\)</span> où :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Fg\)</span> et <span class="math notranslate nohighlight">\(Fd\)</span> sont des arbres binaires de recherche ;</p></li>
+<li><p>toute clé de <span class="math notranslate nohighlight">\(Fg\)</span> est inférieure (ou égale ) à <span class="math notranslate nohighlight">\(c\)</span> ;</p></li>
+<li><p>toute clé de <span class="math notranslate nohighlight">\(Fd\)</span> est supérieure (ou égale) à <span class="math notranslate nohighlight">\(c\)</span>.</p></li>
+</ul>
+</div></blockquote>
+<p>Autrement dit, A est un arbre binaire de recherche lorsque tout nœud de A est associé à une clé supérieure ou
+égale à toute clé de son fils gauche, et inférieure ou égale à toute clé de son fils droit.</p>
+<div class="alert alert-success" role="alert">
+<p><strong>Theorème.</strong> Lors du parcours infixe d’un arbre binaire de recherche, les clés sont parcourues par ordre croissant.<br><br></p>
+<p><strong>Preuve.</strong> On <strong>procède</strong> par induction :</p>
+<ul class="simple">
+<li><p>si A = [ ], il n’y a rien à prouver ;</p></li>
+<li><p>si A = [x,Fg,Fd], on suppose que les parcours infixes de Fg et de Fd se font par ordre de clés croissantes.
+Sachant que toute clé de Fg est inférieure à la clé de x et toute clé de Fd supérieure à cette dernière, le parcours $<span class="math notranslate nohighlight">\(Fg \rightarrow x\rightarrow Fd\)</span>$ est bien effectué par ordre croissant de clé.</p></li>
+</ul>
+</div>
+<section id="insertion-et-suppression">
+<h2>Insertion et suppression<a class="headerlink" href="#insertion-et-suppression" title="Permalink to this heading">#</a></h2>
+<section id="insertion-et-suppression-dans-un-arbre-binaire-de-recherche-quelconque">
+<h3>1. Insertion et suppression dans un arbre binaire de recherche quelconque<a class="headerlink" href="#insertion-et-suppression-dans-un-arbre-binaire-de-recherche-quelconque" title="Permalink to this heading">#</a></h3>
+<section id="insertion">
+<h4>Insertion<a class="headerlink" href="#insertion" title="Permalink to this heading">#</a></h4>
+<p>Pour insérer le couple <span class="math notranslate nohighlight">\((k;u) \in C×V\)</span> dans l’arbre <span class="math notranslate nohighlight">\(A\)</span> on procède ainsi :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>si <span class="math notranslate nohighlight">\(A = [ ]\)</span>, on retourne l’arbre <span class="math notranslate nohighlight">\(((k,u),[],[])\)</span> ;</p></li>
+<li><p>si <span class="math notranslate nohighlight">\(A = [(c,v),Fg,Fd]\)</span> alors :</p>
+<ul>
+<li><p>si <span class="math notranslate nohighlight">\(c = k\)</span> on remplace  le couple <span class="math notranslate nohighlight">\((c,v)\)</span>par <span class="math notranslate nohighlight">\((k,u)\)</span>et on insère <span class="math notranslate nohighlight">\((c,v)\)</span>dans <span class="math notranslate nohighlight">\(Fg\)</span>ou <span class="math notranslate nohighlight">\(Fd\)</span>;</p></li>
+<li><p>si <span class="math notranslate nohighlight">\(c &gt; k\)</span> on insère <span class="math notranslate nohighlight">\((k,u)\)</span> dans <span class="math notranslate nohighlight">\(Fg\)</span>;</p></li>
+<li><p>si <span class="math notranslate nohighlight">\(c &lt; k\)</span> on insère <span class="math notranslate nohighlight">\((k,u)\)</span> dans <span class="math notranslate nohighlight">\(Fd\)</span></p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">insertion_feuille</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">paire</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="n">A</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">paire</span><span class="p">,[],[]])</span>
+    <span class="k">elif</span> <span class="n">paire</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">insertion_feuille</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">paire</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">insertion_feuille</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">paire</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">remplire</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">L</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">paire</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+        <span class="n">insertion_feuille</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">paire</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialiser</span><span class="p">():</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="c1">#Pour avoir les meme valeurs aleatoires</span>
+    <span class="n">L</span><span class="o">=</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+    <span class="n">L</span><span class="o">=</span><span class="p">[(</span><span class="n">e</span><span class="p">,</span><span class="s2">&quot;v&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">L</span><span class="p">]</span>
+    <span class="c1">#print(&quot;--&gt;&quot;.join([str(p) for p in  L]))</span>
+    <span class="n">A</span><span class="o">=</span><span class="p">[]</span><span class="c1">#Initialisation par liste vide.</span>
+    <span class="n">remplire</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
+    <span class="c1">#print(L)</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span><span class="n">L</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="n">initialiser</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(12, &#39;v12&#39;), [(1, &#39;v1&#39;), [], [(8, &#39;v8&#39;), [], [(12, &#39;v12&#39;), [(9, &#39;v9&#39;), [], []], []]]], [(13, &#39;v13&#39;), [], [(16, &#39;v16&#39;), [(15, &#39;v15&#39;), [], []], []]]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cette fonction d’insertion à un coût en <span class="math notranslate nohighlight">\(O(h(A))\)</span>.</p>
+</section>
+</section>
+<section id="suppression">
+<h3>Suppression<a class="headerlink" href="#suppression" title="Permalink to this heading">#</a></h3>
+<section id="supprission-de-la-valeur-minimale">
+<h4>Supprission de la valeur minimale<a class="headerlink" href="#supprission-de-la-valeur-minimale" title="Permalink to this heading">#</a></h4>
+<p>Nous aurons besoin d’une fonction qui prend en argument un arbre <span class="math notranslate nohighlight">\(A\)</span> et retourne le couple <span class="math notranslate nohighlight">\((m;A')\)</span> formé d’un élément m de clé minimale et de l’arbre <span class="math notranslate nohighlight">\(A' = A\backslash  \{m\}\)</span> :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Si A=[ ]: Alors rien à supprimer</p></li>
+<li><p>Si Fg=[ ] alors supprimer la racine et remplacer l’arbre A par Fd.</p></li>
+<li><p>Sinon supprimer le couple minimale à partir de l’arbre gauche.</p></li>
+</ul>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">supprime_min</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="n">droped</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">A</span><span class="p">[:]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">droped</span>
+    <span class="k">return</span> <span class="n">supprime_min</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La suppression d’une clé <span class="math notranslate nohighlight">\(k\)</span> dans un arbre binaire de recherche consiste à supprimer le couple <span class="math notranslate nohighlight">\((k;v)\)</span> situé à la profondeur minimale dans l’arbre <span class="math notranslate nohighlight">\(A = [(c;v);Fg;Fd].\)</span> On procède ainsi :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>si <span class="math notranslate nohighlight">\(k &lt; c\)</span>, on supprime un élément de clé k dans Fg ;</p></li>
+<li><p>si <span class="math notranslate nohighlight">\(k &gt; c\)</span>, on supprime un élément de clé k dans Fd ;</p></li>
+<li><p>si <span class="math notranslate nohighlight">\(k = c\)</span>, alors :</p>
+<ul>
+<li><p>si <span class="math notranslate nohighlight">\(Fg = [ ]\)</span> on renvoie <span class="math notranslate nohighlight">\(Fd\)</span> ;</p></li>
+<li><p>si <span class="math notranslate nohighlight">\(Fd = [ ]\)</span> on renvoie <span class="math notranslate nohighlight">\(Fg\)</span> ;</p></li>
+<li><p>sinon, on supprime de <span class="math notranslate nohighlight">\(Fd\)</span> un élément <span class="math notranslate nohighlight">\(m\)</span> de clé minimale pour obtenir <span class="math notranslate nohighlight">\(Fd'\)</span> et on retourne [m, Fg, Fd’ ].</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>La suppression d’une clé k se réalise alors ainsi :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">supprimer</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">supprimer</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">k</span><span class="o">&gt;</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">supprimer</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">k</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="n">dropped</span><span class="p">,</span><span class="n">A</span><span class="p">[:]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">dropped</span>
+    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="n">dropped</span><span class="p">,</span><span class="n">A</span><span class="p">[:]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">dropped</span>
+    <span class="n">m</span><span class="o">=</span><span class="n">supprime_min</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">A</span><span class="p">[:]</span><span class="o">=</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span><span class="n">_</span><span class="o">=</span><span class="n">initialiser</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(12, &#39;v12&#39;), [(1, &#39;v1&#39;), [], [(8, &#39;v8&#39;), [], [(12, &#39;v12&#39;), [(9, &#39;v9&#39;), [], []], []]]], [(13, &#39;v13&#39;), [], [(16, &#39;v16&#39;), [(15, &#39;v15&#39;), [], []], []]]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">supprimer</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(12, &#39;v12&#39;), [(1, &#39;v1&#39;), [], [(12, &#39;v12&#39;), [(9, &#39;v9&#39;), [], []], []]], [(13, &#39;v13&#39;), [], [(16, &#39;v16&#39;), [(15, &#39;v15&#39;), [], []], []]]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>La fonction de suppression a elle aussi un coût temporel en <span class="math notranslate nohighlight">\(O(h(A))\)</span> puisque chaque appel récursif s’effectue sur un arbre de hauteur inférieur au précédent.</p>
+</section>
+</section>
+</section>
+<section id="requetes-dans-un-arbre-binaire-de-recherche">
+<h2>Requêtes dans un arbre binaire de recherche<a class="headerlink" href="#requetes-dans-un-arbre-binaire-de-recherche" title="Permalink to this heading">#</a></h2>
+<section id="recherche-dune-cle">
+<h3>Recherche d’une clé<a class="headerlink" href="#recherche-dune-cle" title="Permalink to this heading">#</a></h3>
+<p>Une des opérations les plus courantes dans un arbre binaire de recherche <span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\([Fg;(c;v);Fd]\)</span> est la recherche
+d’une valeur associée à une clé particulière <span class="math notranslate nohighlight">\(k\)</span>.
+<BR>La démarche est évidente :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>si <span class="math notranslate nohighlight">\(k = c\)</span>, retourner <span class="math notranslate nohighlight">\(v\)</span> ;</p></li>
+<li><p>si <span class="math notranslate nohighlight">\(k &lt; c\)</span>, rechercher <span class="math notranslate nohighlight">\(k\)</span> dans <span class="math notranslate nohighlight">\(Fg\)</span> ;</p></li>
+<li><p>si <span class="math notranslate nohighlight">\(k &gt; c\)</span>, rechercher <span class="math notranslate nohighlight">\(k\)</span> dans <span class="math notranslate nohighlight">\(Fd\)</span>.</p></li>
+</ul>
+</div></blockquote>
+<p>Dans le cas où les clés ne sont pas toutes distinctes on retournera la valeur associée à la première clé égale à <span class="math notranslate nohighlight">\(k\)</span> rencontrée.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recherche</span><span class="o">=</span><span class="k">lambda</span> <span class="n">A</span><span class="p">,</span><span class="n">k</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">A</span><span class="o">==</span><span class="p">[]</span> <span class="k">else</span>  <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">k</span> <span class="k">else</span> <span class="n">recherche</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">k</span><span class="p">)</span> <span class="k">if</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">else</span> <span class="n">recherche</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recherche</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;v12&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="recherche-de-la-cle-minimale-maximale">
+<h3>2.1 Recherche de la clé minimale / maximale<a class="headerlink" href="#recherche-de-la-cle-minimale-maximale" title="Permalink to this heading">#</a></h3>
+<p>La recherche de la valeur associée à la clé minimale se poursuit dans le fils gauche tant que ce dernier n’est pas
+vide :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="o">&lt;</span><span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">recherche_min</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="c1">#return (+infinie,&quot;no min&quot;) si l&#39;arbre est vide</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">,</span><span class="s2">&quot;no min&quot;</span><span class="p">)</span>
+    <span class="c1">#sinon poursivie la recherche dans le sous arbre gauche</span>
+    <span class="n">min_g</span><span class="o">=</span><span class="n">recherche_min</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">min_g</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">min_g</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span><span class="n">_</span><span class="o">=</span><span class="n">initialiser</span><span class="p">()</span>
+<span class="n">recherche_min</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, &#39;v1&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>La fonction retournant la valeur associée à la clé maximale est symétrique :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">recherche_max</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="c1">#return (-infinie,&quot;no max&quot;) si l&#39;arbre est vide</span>
+        <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">,</span><span class="s2">&quot;no max&quot;</span><span class="p">)</span>
+    <span class="c1">#sinon poursivie la recherche dans le sous arbre droit</span>
+    <span class="n">max_d</span><span class="o">=</span><span class="n">recherche_max</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">max_d</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">max_d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recherche_max</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(16, &#39;v16&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="recherche-du-predecesseur-successeur">
+<h3>Recherche du prédécesseur / successeur<a class="headerlink" href="#recherche-du-predecesseur-successeur" title="Permalink to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(k\in C\)</span> étant donné, il s’agit cette fois de retourner la valeur associée à la plus grande des clés c contenues dans l’arbre et vérifiant :  <span class="math notranslate nohighlight">\( c &lt; k\)</span> (respectivement <span class="math notranslate nohighlight">\(c &gt; k\)</span>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prédécesseur</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">k</span><span class="p">:</span>
+        <span class="n">pred</span><span class="o">=</span><span class="n">prédécesseur</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">pred</span> <span class="o">==</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">pred</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">prédécesseur</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prédécesseur de: &quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{}</span><span class="s2"> &lt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prédécesseur</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>prédécesseur de: 
+	v9 &lt; v12
+	v12 &lt; v13
+	None &lt; v1
+	v1 &lt; v8
+	v15 &lt; v16
+	v13 &lt; v15
+	v9 &lt; v12
+	v8 &lt; v9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">successeur</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="n">k</span><span class="p">:</span>
+        <span class="n">succ</span><span class="o">=</span><span class="n">successeur</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">succ</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">succ</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">successeur</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prédécesseur | clé | successeur &quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{}</span><span class="s2"> &lt; </span><span class="si">{}</span><span class="s2">&lt;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prédécesseur</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">successeur</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>prédécesseur | clé | successeur 
+	v9 &lt; v12&lt;v13
+	v12 &lt; v13&lt;v15
+	None &lt; v1&lt;v8
+	v1 &lt; v8&lt;v9
+	v15 &lt; v16&lt;None
+	v13 &lt; v15&lt;v16
+	v9 &lt; v12&lt;v13
+	v8 &lt; v9&lt;v12
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="complexite-temporelle">
+<h3>Complexité temporelle<a class="headerlink" href="#complexite-temporelle" title="Permalink to this heading">#</a></h3>
+<p>Toutes ces fonctions ont à l’évidence un coût temporel en <span class="math notranslate nohighlight">\(O(h(A))\)</span>, ce qui explique tout l’intérêt qu’il peut y avoir à ce que l’arbre binaire de recherche soit équilibré : dans un arbre binaire quelconque d’ordre <span class="math notranslate nohighlight">\(n = taille(A)\)</span>, on peut affirmer que le coût d’une requête est un <span class="math notranslate nohighlight">\(O(n)\)</span> ; dans le cas d’un arbre de recherche équilibré, on peut assurer un coût en <span class="math notranslate nohighlight">\(O(log(n))\)</span></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/ABR"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Arbres-binaires/Arbres.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Arbres binaires</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../dynamicProgramming/ProgrammationDynamique.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Programmation dynamique</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-et-suppression">Insertion et suppression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-et-suppression-dans-un-arbre-binaire-de-recherche-quelconque">1. Insertion et suppression dans un arbre binaire de recherche quelconque</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion">Insertion</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression">Suppression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#supprission-de-la-valeur-minimale">Supprission de la valeur minimale</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requetes-dans-un-arbre-binaire-de-recherche">Requêtes dans un arbre binaire de recherche</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recherche-dune-cle">Recherche d’une clé</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recherche-de-la-cle-minimale-maximale">2.1 Recherche de la clé minimale / maximale</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recherche-du-predecesseur-successeur">Recherche du prédécesseur / successeur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complexite-temporelle">Complexité temporelle</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By El Hadiq Zouhair
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

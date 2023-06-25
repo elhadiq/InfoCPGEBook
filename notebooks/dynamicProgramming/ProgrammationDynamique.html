@@ -1,0 +1,1054 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Programmation dynamique &#8212; Informatique en CPGE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/dynamicProgramming/ProgrammationDynamique';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Les algorithmes gloutons" href="glouton.html" />
+    <link rel="prev" title="Arbres Binaires de Recherche" href="../ABR/ABR.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Arbres-binaires/Arbres.html">Arbres binaires</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ABR/ABR.html">Arbres Binaires de Recherche</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Programmation dynamique</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../images/TRAITEMENT-DES-IMAGES.html">TRAITEMENT DES IMAGES</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Machine-Learning/KNN-Cours.html">Algorithme KNN: Cours</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../SQL/SQL.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../SQL/SQL1.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/dynamicProgramming/ProgrammationDynamique.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/dynamicProgramming/ProgrammationDynamique.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Programmation dynamique</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Programmation dynamique</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-inconvenient-de-la-programmation-recursive">Un inconvénient de la programmation récursive</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ou-est-le-probleme">Où est le problème ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#une-solution-proposee-par-la-programmation-dynamique-de-type-bottom-up">Une solution proposée par la programmation dynamique de type (Bottom UP)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#une-solution-proposee-par-la-programmation-dynamique-de-type-top-down">Une solution proposée par la programmation dynamique de type (Top Down)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#programmation-dynamique-et-optimisation">Programmation Dynamique et optimisation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demarche-de-resoluton">Démarche de résoluton</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-probleme-sac-a-dos">Exemple: Problème Sac à Dos.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-solution-dynamique-avec-la-programmation-dynamique-par-la-methode-bottom-up">La solution dynamique avec la programmation dynamique par la méthode Bottom_UP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-solution-dynamique-avec-la-programmation-dynamique-par-la-methode-top-down">La solution dynamique avec la programmation dynamique par la méthode Top_Down</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-solution-lineaire-avec-la-programmation-gloutoune">La solution linéaire avec la programmation gloutoune</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="programmation-dynamique">
+<h1>Programmation dynamique<a class="headerlink" href="#programmation-dynamique" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mesurer</span> <span class="kn">import</span> <span class="n">mesure</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1">##cette fonction permet de mesurer le temps d&#39;exécution d&#39;une autre fonction</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="un-inconvenient-de-la-programmation-recursive">
+<h3>Un inconvénient de la programmation récursive<a class="headerlink" href="#un-inconvenient-de-la-programmation-recursive" title="Permalink to this heading">#</a></h3>
+<p>Nous allons nous intéresser au calcul du coefficient binomial <span class="math notranslate nohighlight">\(C^p_n=\binom{n}{p}\)</span> Une solution consiste à utiliser la programmation récursive et la formule de Pascal, ce qui nous amène à écrire :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binom</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="n">p</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">binom</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesure</span><span class="p">(</span><span class="n">binom</span><span class="p">)(</span><span class="mi">30</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temps d&#39;execution :62.49358534812927 secondes 
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>155117520
+</pre></div>
+</div>
+</div>
+</div>
+<p>Malheureusement, cette fonction s’avère très peu efficace, même pour de relativement faibles valeurs de n et p : à titre d’illustration, il faut 42 secondes à mon ordinateur pour calculer  binom(30,15),</p>
+<p>La raison en est facile à comprendre : lorsqu’on observe par exemple l’arbre de calcul de <span class="math notranslate nohighlight">\(\binom{5}{2}\)</span> on constate qu’il ya des appels récursifs sont identiques et donc superflus (figure 1).</p>
+<p>Nous pouvons par exemple constater que le calcul de <span class="math notranslate nohighlight">\(\binom{5}{2}\)</span> nécessite de calculer trois <span class="math notranslate nohighlight">\(\binom{2}{1}\)</span> Et l’expérience montre que le calcul de <span class="math notranslate nohighlight">\(\binom{30}{15}\)</span>, fait appel 40 116 600 au calcul de <span class="math notranslate nohighlight">\(\binom{2}{1}\)</span>.</p>
+<p><img alt="binom.png" src="../../_images/binom.png" /></p>
+</section>
+</section>
+<section id="ou-est-le-probleme">
+<h2>Où est le problème ?<a class="headerlink" href="#ou-est-le-probleme" title="Permalink to this heading">#</a></h2>
+<p>Le problème à résoudre, ici le calcul de <span class="math notranslate nohighlight">\(\binom{n}{p}\)</span>, se ramène à la résolution de deux sous-problèmes : le calcul de <span class="math notranslate nohighlight">\(\binom{n-1}{p-1}\)</span> et de <span class="math notranslate nohighlight">\(\binom{n-1}{p-1}\)</span>, sous-problèmes qui sont en interaction.</p>
+<p>Par exemple, on constate sur la figure 1 que le calcul de <span class="math notranslate nohighlight">\(\binom{4}{1}\)</span> et le calcul de <span class="math notranslate nohighlight">\(\binom{4}{2}\)</span> font tous deux appel au même sous-problème : le calcul de <span class="math notranslate nohighlight">\(\binom{3}{1}\)</span>.</p>
+<p>Ainsi, la présence de sous-problèmes en interaction peut faire croitre très rapidement la complexité d’une
+fonction, au point d’en rendre son usage rédhibitoire.</p>
+<p>Tout comme les problèmes que l’on résout par une méthode « diviser pour régner », les problèmes que l’on
+résout par la programmation dynamique se ramènent à la résolution de sous-problèmes de tailles inférieures.</p>
+<p>Mais à la différence de la méthode « diviser pour régner », ces sous-problèmes ne sont pas indépendants, ce
+qui impose d’accompagner la programmation récursive par une analyse fine des relations de dépendance, ou
+beaucoup plus simplement par l’utilisation de la mémoïsation qui gère les relations de dépendance à notre
+place.</p>
+</section>
+<section id="une-solution-proposee-par-la-programmation-dynamique-de-type-bottom-up">
+<h2>Une solution proposée par la programmation dynamique de type (Bottom UP)<a class="headerlink" href="#une-solution-proposee-par-la-programmation-dynamique-de-type-bottom-up" title="Permalink to this heading">#</a></h2>
+<p>La solution proposée par la programmation dynamique consiste à commencer par résoudre les plus petits des sous-problèmes, puis de combiner leurs solutions pour résoudre des sous-problèmes de plus en plus grands.</p>
+<p>La solution proposée par la programmation dynamique consiste à commencer par résoudre les plus petits des
+sous-problèmes, puis de combiner leurs solutions pour résoudre des sous-problèmes de plus en plus grands.</p>
+<p>Concrètement, le calcul de <span class="math notranslate nohighlight">\(\binom{5 }{2}\)</span> se réalise en suivant le schéma :
+<img alt="bin5.png" src="../../_images/bin5.png" /></p>
+<p>Pour réaliser ce type de solution on utilise souvent un tableau, ici un tableau bi-dimensionnel <span class="math notranslate nohighlight">\((n + 1) \times (p + 1)\)</span> (dont seule la partie pour laquelle <span class="math notranslate nohighlight">\(i &gt; j\)</span> sera utilisée).</p>
+<p>Ce tableau sera progressivement rempli par les valeurs des coefficients binomiaux, en commençant par les plus petits: <img alt="bintable.png" src="../../_images/bintable.png" /></p>
+<p>Il faut faire attention à bien respecter la relation de dépendance (modélisée par les flèches
+sur le schéma ci-dessus)
+pour remplir les cases de ce tableau : la case destinée à recevoir la valeur de <span class="math notranslate nohighlight">\(\binom{i}{j}\)</span> ne peut être remplie qu’après les cases destinées à recevoi <span class="math notranslate nohighlight">\(\binom{i-1}{j-1}\)</span> et <span class="math notranslate nohighlight">\(\binom{i-1}{j}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binom_bottom_up</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span> 
+    <span class="c1">## Algorithme itératif avec list</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span> 
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span> 
+        <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Au prix d’un coût spatial (la création du tableau) cet algorithme est bien plus efficient que l’algorithme récursif initial puisque sa complexité temporelle et spatiale est maintenant en O(np).
+Remarque. Notons que cette solution n’est pas encore optimale : il est facile de constater sur le schéma de dépendance que l’algorithme ci-dessus remplit des cases inutiles pour le calcul de <span class="math notranslate nohighlight">\(\binom{n}  {p}\)</span>  : seules celles qui sont colorées sont nécessaires.</p>
+<p>Un autre inconvénient, plus important celui-là réside dans la perte de lisibilité de l’algorithme, comparativement à l’algorithme récursif. L’idéal serait donc de combiner l’élégance de la programmation récursive avec l’efficacité de la programmation dynamique.</p>
+</section>
+<section id="une-solution-proposee-par-la-programmation-dynamique-de-type-top-down">
+<h2>Une solution proposée par la programmation dynamique de type (Top Down)<a class="headerlink" href="#une-solution-proposee-par-la-programmation-dynamique-de-type-top-down" title="Permalink to this heading">#</a></h2>
+<p>La solution existe, elle porte le nom de mémoïsation.</p>
+<p>Elle consiste à associer à la fonction un dictionnaire qui va mémoriser le résultat du calcul réalisé. Ainsi, à chaque fois que le programme aura besoin de calculer une valeur, il ira voir dans le dictionnaire si la valeur dont il a besoin a déjà été calculée, et ne réalisera le calcul que dans le cas contraire, en ajoutant ensuite la nouvelle valeur calculée au dictionnaire.</p>
+<p>Le calcul du coefficient binomial va alors prendre la forme qui suit :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binom_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">def</span> <span class="nf">binom_top_down</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span> 
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">binom_dict</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="n">p</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">binom_top_down</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">binom_top_down</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">binom_dict</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)]</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">binom_dict</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On peut observer
+que le programme récursif se retrouve presque mot pour mot lignes 5 à 8. !
+Calculons <span class="math notranslate nohighlight">\(\binom{5}{2}\)</span> avec cette fonction, puis observons le contenu du dictionnaire :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binom_top_down</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">binom_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(3, 0): 1, (2, 0): 1, (1, 0): 1, (1, 1): 1, (2, 1): 2, (3, 1): 3, (4, 1): 4, (2, 2): 1, (3, 2): 3, (4, 2): 6, (5, 2): 10}
+</pre></div>
+</div>
+</div>
+</div>
+<p>On peut constater qu’on y retrouve les 10 valeurs nécessaires pour réaliser ce calcul. J’ai représenté figure suivante  l’ordre dans lequel ces valeurs ont été introduites dans le dictionnaire.
+<img alt="order.png" src="../../_images/order.png" /></p>
+<center>Ordre d’entrée dans le dictionnaire.</center></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="programmation-dynamique-et-optimisation">
+<h1>Programmation Dynamique et optimisation<a class="headerlink" href="#programmation-dynamique-et-optimisation" title="Permalink to this heading">#</a></h1>
+<p>Un des principaux champs d’applications de la programmation dynamique est la résolution de problèmes d’optimisation. Il s’agit de problèmes dont chaque solution possède une valeur.</p>
+<p>On cherche alors une solution de valeur optimale (minimale ou maximale).
+Il existe de nombreuses techniques pour résoudre ce genre de problèmes et
+la programmation dynamique en fait partie. Des méthodes gloutonnes peuvent également marcher.</p>
+<p>Il est donc logique de se demander à quelles conditions doit-on utiliser la programmation dynamique pour résoudre un problème d’optimisation.</p>
+<p>Il faut premièrement que l’ensemble des éléments constituant le problème soit discret et fini .
+Par exemple pour la recherche de plus courts chemins, ces éléments sont les sommets du graphe et les arêtes les reliant entre eux.</p>
+<p>Ensuite, une solution optimale au problème global doit induire des</p>
+<ul class="simple">
+<li><p>solutions optimales aux sous-problèmes.</p></li>
+<li><p>Enfin, il est nécessaire que les sous-problèmes ne soient pas indépendants .</p></li>
+</ul>
+<section id="demarche-de-resoluton">
+<h2>Démarche de résoluton<a class="headerlink" href="#demarche-de-resoluton" title="Permalink to this heading">#</a></h2>
+<p>On retrouvera généralement quatre étapes dans la conception d’une solution optimale en utilisant la technique de programmation dynamique :</p>
+<ul class="simple">
+<li><p>Caractériser la structure d’une solution optimale.</p></li>
+<li><p>Défnir par récurrence la valeur d’une solution optimale.</p></li>
+<li><p>Calculer la valeur d’une solution optimale par une méthode Top Down ou Bottom Up.</p></li>
+<li><p>Construire la solution optimale .</p></li>
+</ul>
+</section>
+<section id="exemple-probleme-sac-a-dos">
+<h2>Exemple: Problème Sac à Dos.<a class="headerlink" href="#exemple-probleme-sac-a-dos" title="Permalink to this heading">#</a></h2>
+<p>Le problème du Sac à Dos est un problème classique en informatique. Il modélise une situation analogue au remplissage d’un sac.</p>
+<p>Une personne veut remplir un sac à dos ne pouvant pas supporter plus d’un certain poids <span class="math notranslate nohighlight">\(W_{max}\in \mathbb{N}\)</span>, et elle dispose de n objets On note l’ensemble des objects par <span class="math notranslate nohighlight">\(O = \{1, . . . , n\}\)</span>.</p>
+<p>Chaque objet i a une valeur <span class="math notranslate nohighlight">\(v_ i\)</span> et un poids <span class="math notranslate nohighlight">\(w_i\)</span>.</p>
+<p>Le problème est de trouver un ensemble d’objets tels que:</p>
+<ul class="simple">
+<li><p>tous les objets de cet ensemble puissent être mis dans le sac.</p></li>
+<li><p>la somme des valeurs de ces objets soit maximale.</p></li>
+</ul>
+<p>Le problème d’optimisation correspond à trouver un sous-ensemble <span class="math notranslate nohighlight">\(I\)</span> de <span class="math notranslate nohighlight">\(O\)</span> d’objets dont le poids total est inférieure à <span class="math notranslate nohighlight">\(W\)</span> et dont la valeur totale <span class="math notranslate nohighlight">\(\Sigma_{i\in I}v_i \)</span>  soit maximum.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#exemple</span>
+<span class="c1"># La list des poids</span>
+<span class="n">WL</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="c1">#La list des valeurs</span>
+<span class="n">VL</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="c1">#le poids maximal</span>
+<span class="n">Wmax</span><span class="o">=</span><span class="mi">15</span>
+<span class="c1">#le nombre d&#39;objets</span>
+<span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">WL</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">WL</span><span class="p">,</span><span class="n">VL</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(3, 4), (9, 2), (6, 10), (3, 9)]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(3, 9), (6, 10), (3, 4), (9, 2)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sacAdos_naive</span><span class="p">(</span><span class="n">VL</span><span class="p">,</span><span class="n">WL</span><span class="p">,</span><span class="n">Wmax</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">VL</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">Wmax</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">VL</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">WL</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">w</span><span class="o">&lt;=</span><span class="n">Wmax</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">v</span><span class="o">+</span><span class="n">sacAdos_naive</span><span class="p">(</span><span class="n">VL</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">WL</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">Wmax</span><span class="o">-</span><span class="n">w</span><span class="p">),</span><span class="n">sacAdos_naive</span><span class="p">(</span><span class="n">VL</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">WL</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">Wmax</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">sacAdos_naive</span><span class="p">(</span><span class="n">VL</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">WL</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">Wmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sacAdos_naive2</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">Wmax</span><span class="p">):</span>
+    <span class="c1">#La meme chose avec que la précident sauf on prend comme parametre le nombre d&#39;elements de la list et non pas la list</span>
+    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">Wmax</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">VL</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">WL</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">w</span><span class="o">&lt;=</span><span class="n">Wmax</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">v</span><span class="o">+</span><span class="n">sacAdos_naive2</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="o">-</span><span class="n">w</span><span class="p">),</span><span class="n">sacAdos_naive2</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">sacAdos_naive2</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;le valeur maximal par la méthode naive est &quot;</span><span class="p">,</span><span class="n">sacAdos_naive</span><span class="p">(</span><span class="n">VL</span><span class="p">,</span><span class="n">WL</span><span class="p">,</span><span class="n">Wmax</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;le valeur maximal par la méthode naive est &quot;</span><span class="p">,</span><span class="n">sacAdos_naive2</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>le valeur maximal par la méthode naive est  23
+le valeur maximal par la méthode naive est  19
+</pre></div>
+</div>
+</div>
+</div>
+<section id="la-solution-dynamique-avec-la-programmation-dynamique-par-la-methode-bottom-up">
+<h3>La solution dynamique avec la programmation dynamique par la méthode Bottom_UP<a class="headerlink" href="#la-solution-dynamique-avec-la-programmation-dynamique-par-la-methode-bottom-up" title="Permalink to this heading">#</a></h3>
+<p>Pour calculer cette valeur de façon dynamique, nous allons utiliser un tableau bi-dimensionnel de taille <span class="math notranslate nohighlight">\((n + 1) × (W_{max} + 1)\)</span> destiné à contenir les valeurs de <span class="math notranslate nohighlight">\(f (k, w)\)</span> pour <span class="math notranslate nohighlight">\(k \in [0, n]\)</span> et <span class="math notranslate nohighlight">\(W \in [0, W_{max}]\)</span>.</p>
+<p>Nous prendrons comme valeurs initiales f (0, W) = f (k, 0) = 0, et notre but est de calculer <span class="math notranslate nohighlight">\(f(n, W_{max} )\)</span>.</p>
+<p>Pour remplir ce tableau, il est primordial de respecter l’ordre de dépendance des cases de ce tableau : la case <span class="math notranslate nohighlight">\(f (k, W)\)</span> ne peut être calculée que lorsque les cases <span class="math notranslate nohighlight">\(f (k-1, W)\)</span> et <span class="math notranslate nohighlight">\(f (k -1, W -w_k )\)</span> auront été remplies.
+<img alt="BUSac.png" src="../../_images/BUSac.png" /></p>
+<center >Figure – Ordre de dépendance du sac à dos.</center ><p>En considérant que les valeurs <span class="math notranslate nohighlight">\(c_k\)</span> et <span class="math notranslate nohighlight">\(w_k\)</span> sont données sous forme de tableaux, on en déduit l’algorithme :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">sacAdos_Bottom_Up</span><span class="p">(</span><span class="n">WL</span><span class="p">,</span><span class="n">VL</span><span class="p">,</span> <span class="n">Wmax</span><span class="p">):</span>
+    <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">VL</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">WL</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">w</span><span class="p">:</span>
+                <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">w</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">VL</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="o">-</span><span class="n">WL</span><span class="p">[</span><span class="n">k</span><span class="p">]],</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">w</span><span class="p">]</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">Wmax</span><span class="p">]</span>
+    <span class="c1">#return f</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;le valeur maximal par la méthode bottom up (iteratif) est &quot;</span><span class="p">,</span><span class="n">sacAdos_Bottom_Up</span><span class="p">(</span><span class="n">WL</span><span class="p">,</span><span class="n">VL</span><span class="p">,</span><span class="n">Wmax</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>le valeur maximal par la méthode bottom up (iteratif) est  23.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remarque. Cet algorithme calcule la valeur maximale qui peut être emportée dans le sac, mais pas la façon d’y parvenir.</p>
+<p>Pour la connaître il faut utiliser le tableau (ou le dictionnaire) calculé par la fonction précédente, et retrouver le chemin qui mène de la case initiale à la case finale.</p>
+<p>Par exemple, si on modifie la fonction non récursive (la première) pour qu’elle renvoie le tableau f qui a été calculé au lieu de la valeur <span class="math notranslate nohighlight">\(f[len(WL), Wmax]\)</span> , le fonction qui détermine les objets à choisir s’écrira :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sacAdos_Bottom_Up_modifié</span><span class="p">(</span><span class="n">WL</span><span class="p">,</span><span class="n">VL</span><span class="p">,</span> <span class="n">Wmax</span><span class="p">):</span>
+    <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">VL</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">WL</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">w</span><span class="p">:</span>
+                <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">w</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">VL</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="o">-</span><span class="n">WL</span><span class="p">[</span><span class="n">k</span><span class="p">]],</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">w</span><span class="p">]</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">Wmax</span><span class="p">],</span><span class="n">f</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objetsAchoisir</span><span class="p">(</span><span class="n">VL</span><span class="p">,</span> <span class="n">WL</span><span class="p">,</span> <span class="n">Wmax</span><span class="p">):</span>
+    <span class="n">v</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="n">sacAdos_Bottom_Up_modifié</span><span class="p">(</span><span class="n">VL</span><span class="p">,</span> <span class="n">WL</span><span class="p">,</span> <span class="n">Wmax</span><span class="p">)</span>
+    <span class="n">sac</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">k</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">VL</span><span class="p">),</span> <span class="n">Wmax</span>
+    <span class="k">while</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">W</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">W</span><span class="p">]:</span>
+            <span class="n">sac</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">VL</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">WL</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+            <span class="n">W</span> <span class="o">-=</span> <span class="n">WL</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">,</span><span class="n">sac</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">objetsAchoisir</span><span class="p">(</span><span class="n">VL</span><span class="p">,</span> <span class="n">WL</span><span class="p">,</span> <span class="n">Wmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(15.0, [(10, 6), (2, 9)])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-solution-dynamique-avec-la-programmation-dynamique-par-la-methode-top-down">
+<h3>La solution dynamique avec la programmation dynamique par la méthode Top_Down<a class="headerlink" href="#la-solution-dynamique-avec-la-programmation-dynamique-par-la-methode-top-down" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sacAdos_TD</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">Wmax</span><span class="p">,</span><span class="n">memo</span><span class="o">=</span><span class="nb">dict</span><span class="p">()):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">Wmax</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">memo</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">==-</span><span class="mi">1</span><span class="p">:</span> 
+            <span class="n">memo</span><span class="p">[(</span><span class="n">k</span><span class="p">,</span><span class="n">Wmax</span><span class="p">)]</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">Wmax</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Wmax</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">memo</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">Wmax</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">Wmax</span><span class="p">]</span>
+        <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">VL</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">WL</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">w</span><span class="o">&lt;=</span><span class="n">Wmax</span><span class="p">:</span>
+            <span class="n">memo</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">Wmax</span><span class="p">]</span><span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">v</span><span class="o">+</span><span class="n">sacAdos_TD</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="o">-</span><span class="n">w</span><span class="p">,</span><span class="n">memo</span><span class="p">),</span><span class="n">sacAdos_TD</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="p">,</span><span class="n">memo</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">memo</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">Wmax</span><span class="p">]</span><span class="o">=</span><span class="n">sacAdos_TD</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="p">,</span><span class="n">memo</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">Wmax</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sacAdos_TD</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Wmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-solution-lineaire-avec-la-programmation-gloutoune">
+<h3>La solution linéaire avec la programmation gloutoune<a class="headerlink" href="#la-solution-lineaire-avec-la-programmation-gloutoune" title="Permalink to this heading">#</a></h3>
+<p><img alt="glouton.png" src="../../_images/glouton.png" /></p>
+<center>Une illustration des programmations dynamique et gloutonne.</center><p>Pour élaborer un algorithme glouton résolvant le problème, il faut définir une heuristique, ici un critère de
+priorité pour le choix des objets à prendre.</p>
+<p>Nous pouvons par exemple choisir en priorité les objets dont le rapport <span class="math notranslate nohighlight">\( \frac{valeur}{poids}= \frac{v_i}{w_i}\)</span> est maximal, et remplir le sac tant que c’est possible :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sac_à_dos_glouton</span><span class="p">(</span><span class="n">WL</span><span class="p">,</span><span class="n">VL</span><span class="p">,</span><span class="n">Wmax</span><span class="p">):</span>
+    <span class="n">S</span><span class="o">=</span><span class="nb">sorted</span><span class="p">([(</span><span class="n">WL</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">VL</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">WL</span><span class="p">))</span> <span class="p">],</span>
+    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">Sol</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">w</span><span class="o">=</span><span class="n">Wmax</span>
+    <span class="n">v</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">w</span><span class="p">:</span>
+            <span class="n">Sol</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+            <span class="n">v</span><span class="o">+=</span><span class="n">o</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">w</span><span class="o">-=</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">,</span><span class="n">Sol</span>
+    <span class="c1">#return v</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sac_à_dos_glouton</span><span class="p">(</span><span class="n">WL</span><span class="p">,</span><span class="n">VL</span><span class="p">,</span><span class="n">Wmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(23, [(3, 9), (6, 10), (3, 4)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cette fois l’algorithme heristique gloutoun donne la solution optimale, mais ce n’est pas le cas en général</p>
+<p>Car il donne une solution qui est une proche mais non pas nécessairmet égal à la solution optimal.</p>
+<p>Pour évaluer la qualité de cette heuristique, On réalis1000 expériences pour chacune desquelles On :</p>
+<ul class="simple">
+<li><p>pris au hasard 100 objets de valeurs comprises entre 1 et 20 et de poids compris entre 1 et 30 ;</p></li>
+<li><p>calcul la valeur optimale obtenue pour un poids maximal égal à 300 à la fois par l’algorithme glouton
+ci-dessus et par l’algorithme dynamique que nous étudierons plus loin.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fiabilité</span><span class="p">(</span><span class="n">glouton</span><span class="p">,</span><span class="n">dynamique_bu</span><span class="p">,</span><span class="n">samples</span><span class="p">,</span><span class="n">number_of_objects</span><span class="p">):</span>
+    <span class="n">VLL</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">,(</span><span class="n">samples</span><span class="p">,</span><span class="n">number_of_objects</span><span class="p">))</span>
+    <span class="n">WLL</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">30</span><span class="p">,(</span><span class="n">samples</span><span class="p">,</span><span class="n">number_of_objects</span><span class="p">))</span>
+    <span class="n">Wmax</span><span class="o">=</span><span class="mi">300</span>
+    <span class="n">glouton_values</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">dynamique_values</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samples</span><span class="p">):</span>
+        <span class="n">glouton_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">glouton</span><span class="p">(</span><span class="n">WLL</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">VLL</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">Wmax</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">dynamique_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dynamique_bu</span><span class="p">(</span><span class="n">WLL</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">VLL</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>  <span class="n">Wmax</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">glouton_values</span><span class="p">,</span><span class="n">dynamique_values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="n">fiabilité</span><span class="p">(</span><span class="n">sac_à_dos_glouton</span><span class="p">,</span><span class="n">sacAdos_Bottom_Up</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">g</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">d</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="mi">100</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">g</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">0.1</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fiab</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">g</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grand_écart</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">d</span><span class="p">):</span>
+    <span class="c1">#l&#39;equivalent au norm sup dans un evn</span>
+    <span class="n">imax</span><span class="o">=</span><span class="mi">0</span>
+    <span class="nb">max</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)):</span>
+        <span class="n">ecart</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">max</span><span class="o">&lt;</span><span class="n">ecart</span><span class="p">:</span>
+            <span class="nb">max</span><span class="o">=</span><span class="n">ecart</span>
+            <span class="n">imax</span><span class="o">=</span><span class="n">i</span>
+    <span class="k">return</span> <span class="n">imax</span>
+<span class="n">i</span><span class="o">=</span><span class="n">grand_écart</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">résultat</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Sur les 200 expériences, </span><span class="si">{}</span><span class="s2"> ont donné le même résultat pour chacun des deux algorithmes,</span>
+<span class="s2"> et dans le cas des </span><span class="si">{}</span><span class="s2"> autres, l&#39;algorithme glouton a toujours rendu un résultat au moins égal à </span><span class="si">{}% d</span><span class="s2">u résultat de l&#39;algorithme dynamique. </span>
+<span class="s2">On peut donc considérer ici qu&#39;à défaut de donner un résultat toujours exact, l&#39;algorithme glouton donne un résultat acceptable tout en ayant une complexité moindre que l&#39;algorithme dynamique.</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fiab</span><span class="p">,</span><span class="mi">200</span><span class="o">-</span><span class="n">fiab</span><span class="p">,</span><span class="nb">int</span><span class="p">((</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">résultat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sur les 200 expériences, 97 ont donné le même résultat pour chacun des deux algorithmes,
+ et dans le cas des 103 autres, l&#39;algorithme glouton a toujours rendu un résultat au moins égal à 98% du résultat de l&#39;algorithme dynamique. 
+On peut donc considérer ici qu&#39;à défaut de donner un résultat toujours exact, l&#39;algorithme glouton donne un résultat acceptable tout en ayant une complexité moindre que l&#39;algorithme dynamique.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/dynamicProgramming"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../ABR/ABR.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Arbres Binaires de Recherche</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="glouton.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Les algorithmes gloutons</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Programmation dynamique</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-inconvenient-de-la-programmation-recursive">Un inconvénient de la programmation récursive</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ou-est-le-probleme">Où est le problème ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#une-solution-proposee-par-la-programmation-dynamique-de-type-bottom-up">Une solution proposée par la programmation dynamique de type (Bottom UP)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#une-solution-proposee-par-la-programmation-dynamique-de-type-top-down">Une solution proposée par la programmation dynamique de type (Top Down)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#programmation-dynamique-et-optimisation">Programmation Dynamique et optimisation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demarche-de-resoluton">Démarche de résoluton</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-probleme-sac-a-dos">Exemple: Problème Sac à Dos.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-solution-dynamique-avec-la-programmation-dynamique-par-la-methode-bottom-up">La solution dynamique avec la programmation dynamique par la méthode Bottom_UP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-solution-dynamique-avec-la-programmation-dynamique-par-la-methode-top-down">La solution dynamique avec la programmation dynamique par la méthode Top_Down</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-solution-lineaire-avec-la-programmation-gloutoune">La solution linéaire avec la programmation gloutoune</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By El Hadiq Zouhair
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

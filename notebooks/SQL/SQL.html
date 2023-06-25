@@ -1,0 +1,2727 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Algèbre Relationnelle Et Langage SQL &#8212; Informatique en CPGE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/SQL/SQL';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Algèbre Relationnelle Et Langage SQL" href="SQL1.html" />
+    <link rel="prev" title="Algorithme KNN: Cours" href="../Machine-Learning/KNN-Cours.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Arbres-binaires/Arbres.html">Arbres binaires</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ABR/ABR.html">Arbres Binaires de Recherche</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamicProgramming/ProgrammationDynamique.html">Programmation dynamique</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../images/TRAITEMENT-DES-IMAGES.html">TRAITEMENT DES IMAGES</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Machine-Learning/KNN-Cours.html">Algorithme KNN: Cours</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Algèbre Relationnelle Et Langage SQL</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="SQL1.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/SQL/SQL.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/SQL/SQL.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Algèbre Relationnelle Et Langage SQL</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Algèbre Relationnelle Et Langage SQL</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plan">Plan</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#une-relation-table">Une Relation (Table)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-projection">La Projection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-des-doublons">Suppression des doublons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-selection">La sélection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sql-like">SQL LIKE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-ensemblistes">Opérateurs Ensemblistes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#union">Union :</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lintersection">L’intersection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-difference">La différence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-produit-cartesien">Le produit cartésien</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renommage">Renommage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-division">La Division</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-jointure">La Jointure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="algebre-relationnelle-et-langage-sql">
+<h1>Algèbre Relationnelle Et Langage SQL<a class="headerlink" href="#algebre-relationnelle-et-langage-sql" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://sql.sh">Je reccomande ce site pour plus de d’infomrations en détaille sur le langage SQL</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">con</span><span class="o">=</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;fifa/worldcup.db&quot;</span><span class="p">)</span>
+<span class="n">sql</span><span class="o">=</span><span class="k">lambda</span> <span class="n">requete</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="n">requete</span><span class="p">,</span><span class="n">con</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="plan">
+<h2>Plan<a class="headerlink" href="#plan" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Introduction</p></li>
+<li><p>Opérateurs unaires</p></li>
+<li><p>Opérateurs ensemblistes</p></li>
+<li><p>Opérateurs de jointure</p></li>
+<li><p>Opérateurs de division</p></li>
+<li><p>Opérateurs déduits</p></li>
+<li><p>Conclusion</p></li>
+</ol>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h1>
+<p>L’algèbre relationnelle est un ensemble d’opérateurs que l’on peut appliquer à des relations, et dont le résultat est une relation.</p>
+<p>Comme le résultat est toujours une relation on pourra combiner les opérateurs : on forme ainsi, à partir d’opérateurs élémentaires, des requêtes élaborées.</p>
+<p>L’algèbre relationnelle possède plusieurs opérateurs :</p>
+<ul class="simple">
+<li><p>Certains sont ensemblistes (selon la théorie des ensembles)</p></li>
+<li><p>D’autres sont relationnels (spécifiques à la notion de relation)</p></li>
+</ul>
+<p>On peut aussi classer les opérateurs selon qu’ils s’appliquent à une(uniare) ou à plusieurs(n-aire) relations (tables).</p>
+<p>Le langage SQL permet d’interroger une base de données à l’aide de la commande SELECT.<br />
+Cette commande permet de :</p>
+<ul class="simple">
+<li><p>Récupérer certaines colonnes (SELECT)</p></li>
+<li><p>De certaines tables (FROM)</p></li>
+<li><p>Récupérer certaines lignes (WHERE)</p></li>
+<li><p>Regrouper certaines lignes (GROUP BY)</p></li>
+<li><p>Filtrer après le regroupement (HAVING)</p></li>
+<li><p>Trier les résultats (ORDER BY)</p></li>
+<li><p>Limiter le nombre d’enregistrements retournés (LIMIT)</p></li>
+</ul>
+<section id="une-relation-table">
+<h2>Une Relation (Table)<a class="headerlink" href="#une-relation-table" title="Permalink to this heading">#</a></h2>
+<p>Une relation R est un sous-ensemble du produit cartésien de n domaines(ensembles) <span class="math notranslate nohighlight">\(D_1 , ..., D_n\)</span> , <span class="math notranslate nohighlight">\(n \in\mathbb{N}\)</span>
+$<span class="math notranslate nohighlight">\(R\subset D_1 \times ...  \times D_n\)</span>$
+Définie par son nom, et par son schéma</p>
+<p><strong><span class="math notranslate nohighlight">\(\large{\text{Définition (schéma d’une relation)}}\)</span></strong></p>
+<p>Le schéma d’une relation définit les domaines sur lesquels elle est construite et donne un nom à ces domaines. <br />
+On note  <span class="math notranslate nohighlight">\(R(A_1 : D_1 , ..., A_n : D_n)\)</span></p>
+<ul class="simple">
+<li><p>Les noms d’attributs d’un même schéma doivent être tous différents.</p></li>
+<li><p><strong>Exemple :</strong> Personne(nom : texte, âge : entier, marié : booléen)</p></li>
+<li><p>Lorsque l’indication des domaines n’est pas requise, un schéma de relation pourra être noté : <span class="math notranslate nohighlight">\((A_1 , ..., A_n )\)</span></p></li>
+</ul>
+</section>
+<section id="la-projection">
+<h2>La Projection<a class="headerlink" href="#la-projection" title="Permalink to this heading">#</a></h2>
+<p>La projection sur une relation (table) R définit une relation P restreinte à un sous-ensemble des attributs (colonnes) de R, en extrayant les valeurs des attributs spécifiés et en supprimant les doublons.</p>
+<p>Notation :<br />
+Soit R une relation n-aire, et <span class="math notranslate nohighlight">\(\sigma \in S_n\)</span>  une permutation, et <span class="math notranslate nohighlight">\(r\leq n\)</span></p>
+<p>Alors la projection de R suivant les attributs <span class="math notranslate nohighlight">\(A_{\sigma(1)},...,A_{\sigma(r)}\)</span>  noté  <span class="math notranslate nohighlight">\(\Pi_{A_{\sigma(1)},...,A_{\sigma(r)}}(R)\)</span> est définie par:</p>
+<div class="math notranslate nohighlight">
+\[P:=\Pi_{A_{\sigma(1)},...,A_{\sigma(r)}}(R)=\{ (v_{\sigma(1)},v_{\sigma(2)},...,v_{\sigma(r)}) | (v_1,v_2,...,v_n) \in R \}\]</div>
+<p>avec <span class="math notranslate nohighlight">\(A_1, ... , A_n\)</span> sont des attributs (colonnes) de R.</p>
+<p><strong>Requête SQL :</strong></p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">A1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="n">Ap</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">R</span><span class="p">;</span><span class="w"></span>
+<span class="n">ou</span><span class="w"> </span><span class="n">bien</span><span class="w"> </span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">A1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="n">Ap</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">R</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Le mot clé <strong>DISTINCT</strong> permet de supprimer les doublons.</p>
+<p><strong>Obtenir toutes les colonnes d’un tableau</strong></p>
+<p>Il est possible de retourner automatiquement toutes les colonnes d’un tableau sans avoir à connaître le nom de toutes les colonnes. Au lieu de lister toutes les colonnes, il faut simplement utiliser le caractère “*” (étoile). C’est un joker qui permet de sélectionner toutes les colonnes. Il s’utilise de la manière suivante:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Exemple :</strong></p>
+<p>Soit le modèle relationnel : <strong>confederations(confederation_id, confederation_name, confederation_code, confederation_wikipedia_link)</strong></p>
+<p>Afficher toutes les informations des confederations</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">confederations</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;select * from confederations&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>confederation_id</th>
+      <th>confederation_name</th>
+      <th>confederation_code</th>
+      <th>confederation_wikipedia_link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CF-1</td>
+      <td>Asian Football Confederation</td>
+      <td>AFC</td>
+      <td>https://en.wikipedia.org/wiki/Asian_Football_C...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CF-2</td>
+      <td>Confederation of African Football</td>
+      <td>CAF</td>
+      <td>https://en.wikipedia.org/wiki/Confederation_of...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CF-3</td>
+      <td>Confederation of North, Central American and C...</td>
+      <td>CONCACAF</td>
+      <td>https://en.wikipedia.org/wiki/CONCACAF</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CF-4</td>
+      <td>South American Football Confederation</td>
+      <td>CONMEBOL</td>
+      <td>https://en.wikipedia.org/wiki/CONMEBOL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CF-5</td>
+      <td>Oceania Football Confederation</td>
+      <td>OFC</td>
+      <td>https://en.wikipedia.org/wiki/Oceania_Football...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CF-6</td>
+      <td>Union of European Football Associations</td>
+      <td>UEFA</td>
+      <td>https://en.wikipedia.org/wiki/UEFA</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Afficher les confederation_names et confederation_code des confederations :</p>
+<div class="math notranslate nohighlight">
+\[PI_{\text{confederation\_name,confederation\_code}}(confederations)\]</div>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">confederation_name</span><span class="p">,</span><span class="n">confederation_code</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">confederations</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT confederation_name,confederation_code</span>
+<span class="s2">FROM confederations</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>confederation_name</th>
+      <th>confederation_code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Asian Football Confederation</td>
+      <td>AFC</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Confederation of African Football</td>
+      <td>CAF</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Confederation of North, Central American and C...</td>
+      <td>CONCACAF</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>South American Football Confederation</td>
+      <td>CONMEBOL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Oceania Football Confederation</td>
+      <td>OFC</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Union of European Football Associations</td>
+      <td>UEFA</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="suppression-des-doublons">
+<h2>Suppression des doublons<a class="headerlink" href="#suppression-des-doublons" title="Permalink to this heading">#</a></h2>
+<p>L’utilisation de la commande <strong>SELECT</strong> en SQL permet de lire toutes les données d’une ou plusieurs colonnes. Cette commande peut potentiellement afficher des lignes en doubles. Pour éviter des redondances dans les résultats il faut simplement ajouter <strong>DISTINCT</strong> après le mot <strong>SELECT</strong>.</p>
+<p>Commande basique</p>
+<p>L’utilisation basique de cette commande consiste alors à effectuer la requête suivante:</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">ma_colonne</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">nom_du_tableau</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select distinct host_country from tournaments</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>host_country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Uruguay</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Italy</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>France</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Switzerland</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Sweden</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Chile</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>England</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Mexico</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>West Germany</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Argentina</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Spain</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>United States</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Korea, Japan</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Germany</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>South Africa</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Russia</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Qatar</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select distinct host_country from tournaments</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>host_country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Uruguay</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Italy</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>France</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Switzerland</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Sweden</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Chile</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>England</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Mexico</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>West Germany</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Argentina</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Spain</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>United States</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Korea, Japan</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Germany</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>South Africa</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Russia</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Qatar</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="la-selection">
+<h2>La sélection<a class="headerlink" href="#la-selection" title="Permalink to this heading">#</a></h2>
+<p>La sélection sur une relation R définit une relation T de même schéma qui ne contient que les tuples (lignes) de R qui satisfont à la condition (ou prédicat) spécifiée.</p>
+<p>Notation :</p>
+<p><span class="math notranslate nohighlight">\(S=\sigma_{\text{condition}}(R)= \{ ligne \in R  \text{ ligne satisfait condition} \} \)</span></p>
+<p>La condition (prédicat) est une expression logique faisant intervenir :</p>
+<ul class="simple">
+<li><p>les colonnes de la table</p></li>
+<li><p>des constantes</p></li>
+<li><p>les opérateurs de comparaison <span class="math notranslate nohighlight">\(=, \neq,&lt;,&gt;, \leq, \geq\)</span></p></li>
+<li><p>les opérateurs logique ET <span class="math notranslate nohighlight">\((\wedge), \mathrm{OU}(\vee), \mathrm{NON}(\neg)\)</span> pour faire la combinaison de plusieurs conditions.</p></li>
+</ul>
+<p>La condition, en SQL, peut contenir les comparateurs :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(=\)</span> ou <span class="math notranslate nohighlight">\(!=\)</span> (ou bien <span class="math notranslate nohighlight">\(&lt; &gt;\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(&gt;\)</span>, <span class="math notranslate nohighlight">\(&lt;\)</span>, <span class="math notranslate nohighlight">\(\geq\)</span>, <span class="math notranslate nohighlight">\(\leq\)</span></p></li>
+<li><p><em>LIKE</em> ’modèle’</p></li>
+<li><p><em>IN</em> (<span class="math notranslate nohighlight">\(valeur_1\)</span>,… , <span class="math notranslate nohighlight">\(valeur_N\)</span>)</p></li>
+<li><p><em>BETWEEN</em> … <em>AND</em> …</p></li>
+<li><p><em>IS NULL, IS NOT NULL</em></p></li>
+<li><p><em>AND, OR, NOT</em></p></li>
+<li><p>La fonction <em>strftime (format, time)</em> sur les dates : ( <span class="math notranslate nohighlight">\(\%\)</span>d : le jour,
+<span class="math notranslate nohighlight">\(\%\)</span>m : le mois , <span class="math notranslate nohighlight">\(\%\)</span>Y : l’année,<span class="math notranslate nohighlight">\(\%\)</span>H : l’heure, <span class="math notranslate nohighlight">\(\%\)</span>M : les minutes, <span class="math notranslate nohighlight">\(\%\)</span>S : les
+secondes … )</p></li>
+</ul>
+<p><strong>Exemple:</strong> <br />
+Soit le modèle relationnel :</p>
+<p><strong>tournaments(tournament_id,tournament_name,year,start_date DATE,end_date,  host_country ,
+winner ,  host_won ,  count_teams ,  group_stage ,  second_group_stage ,  final_round ,  round_of_16 ,  quarter_finals ,  semi_finals ,  third_place_match ,  final ,
+);</strong></p>
+<p>Afficher les tournament_id et tournament_name des tournaments dont le champion est le Brazil :</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">tournament_id</span><span class="p">,</span><span class="n">tournament_name</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tournaments</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">winner</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Brazil&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Ou bien</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">tournament_id</span><span class="p">,</span><span class="n">tournament_name</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tournaments</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">winner</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;Brazil&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT tournament_id,tournament_name</span>
+<span class="s2">FROM tournaments </span>
+<span class="s2">WHERE winner= &#39;Brazil&#39; ;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tournament_id</th>
+      <th>tournament_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WC-1958</td>
+      <td>1958 FIFA World Cup</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WC-1962</td>
+      <td>1962 FIFA World Cup</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>WC-1970</td>
+      <td>1970 FIFA World Cup</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>WC-1994</td>
+      <td>1994 FIFA World Cup</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>WC-2002</td>
+      <td>2002 FIFA World Cup</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT tournament_id,tournament_name</span>
+<span class="s2">FROM tournaments </span>
+<span class="s2">WHERE winner like &#39;Brazil&#39; ;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tournament_id</th>
+      <th>tournament_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WC-1958</td>
+      <td>1958 FIFA World Cup</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WC-1962</td>
+      <td>1962 FIFA World Cup</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>WC-1970</td>
+      <td>1970 FIFA World Cup</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>WC-1994</td>
+      <td>1994 FIFA World Cup</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>WC-2002</td>
+      <td>2002 FIFA World Cup</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Exemple</strong>
+Afficher les tournament_id et tournament_name et winner des tournaments dont le champion est le Brazil ou Italy:</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">tournament_id</span><span class="p">,</span><span class="n">tournament_name</span><span class="p">,</span><span class="w"> </span><span class="n">winner</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tournaments</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">winner</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Brazil&#39;</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">winner</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="ss">&quot;Italy&quot;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Ou bien</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">tournament_id</span><span class="p">,</span><span class="n">tournament_name</span><span class="p">,</span><span class="w"> </span><span class="n">winner</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tournaments</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">winner</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Brazil&#39;</span><span class="p">,</span><span class="ss">&quot;Italy&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT tournament_id,tournament_name, winner</span>
+<span class="s2">FROM tournaments </span>
+<span class="s2">WHERE winner= &#39;Brazil&#39; or winner like &quot;Italy&quot; ;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tournament_id</th>
+      <th>tournament_name</th>
+      <th>winner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WC-1934</td>
+      <td>1934 FIFA World Cup</td>
+      <td>Italy</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WC-1938</td>
+      <td>1938 FIFA World Cup</td>
+      <td>Italy</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>WC-1958</td>
+      <td>1958 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>WC-1962</td>
+      <td>1962 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>WC-1970</td>
+      <td>1970 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>WC-1982</td>
+      <td>1982 FIFA World Cup</td>
+      <td>Italy</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>WC-1994</td>
+      <td>1994 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>WC-2002</td>
+      <td>2002 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>WC-2006</td>
+      <td>2006 FIFA World Cup</td>
+      <td>Italy</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT tournament_id,tournament_name,winner</span>
+<span class="s2">FROM tournaments </span>
+<span class="s2">WHERE winner in (&#39;Brazil&#39;,&quot;Italy&quot;) ;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tournament_id</th>
+      <th>tournament_name</th>
+      <th>winner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WC-1934</td>
+      <td>1934 FIFA World Cup</td>
+      <td>Italy</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WC-1938</td>
+      <td>1938 FIFA World Cup</td>
+      <td>Italy</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>WC-1958</td>
+      <td>1958 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>WC-1962</td>
+      <td>1962 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>WC-1970</td>
+      <td>1970 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>WC-1982</td>
+      <td>1982 FIFA World Cup</td>
+      <td>Italy</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>WC-1994</td>
+      <td>1994 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>WC-2002</td>
+      <td>2002 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>WC-2006</td>
+      <td>2006 FIFA World Cup</td>
+      <td>Italy</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="sql-like">
+<h2>SQL LIKE<a class="headerlink" href="#sql-like" title="Permalink to this heading">#</a></h2>
+<p>L’opérateur LIKE est utilisé dans la clause WHERE des requêtes SQL. Ce mot-clé permet d’effectuer une recherche sur un modèle particulier. Il est par exemple possible de rechercher les enregistrements dont la valeur d’une colonne commence par telle ou telle lettre. Les modèles de recherches sont multiple.</p>
+<p>Syntaxe
+La syntaxe à utiliser pour utiliser l’opérateur LIKE est la suivante :</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">colonne</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="n">modele</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Dans cet exemple le “modèle” n’a pas été défini, mais il ressemble très généralement à l’un des exemples suivants:</p>
+<ul class="simple">
+<li><p>LIKE ‘%a’ : le caractère “%” est un caractère joker qui remplace tous les autres caractères. Ainsi, ce modèle permet de rechercher toutes les chaines de caractère qui se termine par un “a”.</p></li>
+<li><p>LIKE ‘a%’ : ce modèle permet de rechercher toutes les lignes de “colonne” qui commence par un “a”.</p></li>
+<li><p>LIKE ‘%a%’ : ce modèle est utilisé pour rechercher tous les enregistrement qui utilisent le caractère “a”.</p></li>
+<li><p>LIKE ‘pa%on’ : ce modèle permet de rechercher les chaines qui commence par “pa” et qui se terminent par “on”, comme “pantalon” ou “pardon”.</p></li>
+<li><p>LIKE ‘a_c’ : peu utilisé, le caractère “_” (underscore) peut être remplacé par n’importe quel caractère, mais un seul caractère uniquement (alors que le symbole pourcentage “%” peut être remplacé par un nombre incalculable de caractères . Ainsi, ce modèle permet de retourner les lignes “aac”, “abc” ou même “azc”.</p></li>
+</ul>
+<p><strong>Eemple</strong></p>
+<p>Afficher les tournament_id et tournament_name et winner des tournaments dont le tournament_name  commence par ‘20’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT tournament_id, tournament_name, winner</span>
+<span class="s2">FROM tournaments</span>
+<span class="s2">WHERE tournament_name like &#39;20%&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tournament_id</th>
+      <th>tournament_name</th>
+      <th>winner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WC-2002</td>
+      <td>2002 FIFA World Cup</td>
+      <td>Brazil</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WC-2006</td>
+      <td>2006 FIFA World Cup</td>
+      <td>Italy</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>WC-2010</td>
+      <td>2010 FIFA World Cup</td>
+      <td>Spain</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>WC-2014</td>
+      <td>2014 FIFA World Cup</td>
+      <td>Germany</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>WC-2018</td>
+      <td>2018 FIFA World Cup</td>
+      <td>France</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>WC-2022</td>
+      <td>2022 FIFA World Cup</td>
+      <td>Argentina</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Eemple</strong></p>
+<p>Soit le modèle relationnel :<br />
+<strong>players(player_id TEXT NOT NULL,<br />
+family_name TEXT,<br />
+given_name TEXT,<br />
+birth_date DATE,<br />
+goal_keeper BOOLEAN,<br />
+defender BOOLEAN,<br />
+midfielder BOOLEAN,<br />
+forward BOOLEAN,<br />
+count_tournaments INTEGER,<br />
+list_tournaments TEXT,<br />
+player_wikipedia_link TEXT,<br />
+PRIMARY KEY (player_id)
+);</strong></p>
+<p>Afficher les noms et prénoms,le jour, le mois et l’année de naissance des players dont l’année de naissance est 2004</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select family_name,given_name,</span>
+<span class="s2">strftime(&#39;%m&#39;,birth_date) Mois</span>
+<span class="s2"> from players</span>
+<span class="s2">  where Mois like &quot;01&quot;</span>
+
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>family_name</th>
+      <th>given_name</th>
+      <th>Mois</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Abdulghani</td>
+      <td>Hussein</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Abdulghani</td>
+      <td>Hussein</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Aboubakar</td>
+      <td>Vincent</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Acácio</td>
+      <td>not applicable</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Acquah</td>
+      <td>Afriyie</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>834</th>
+      <td>Zitouni</td>
+      <td>Ali</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <th>835</th>
+      <td>Zlatković</td>
+      <td>Siniša</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <th>836</th>
+      <td>Zombori</td>
+      <td>Vilmos</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <th>837</th>
+      <td>Zuberbühler</td>
+      <td>Pascal</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <th>838</th>
+      <td>Zumelzú</td>
+      <td>Adolfo</td>
+      <td>01</td>
+    </tr>
+  </tbody>
+</table>
+<p>839 rows × 3 columns</p>
+</div></div></div>
+</div>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">family_name</span><span class="p">,</span><span class="n">given_name</span><span class="p">,</span><span class="w"></span>
+<span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">,</span><span class="n">birth_date</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Année</span><span class="p">,</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%m&#39;</span><span class="p">,</span><span class="n">birth_date</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Mois</span><span class="p">,</span><span class="w"></span>
+<span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%d&#39;</span><span class="p">,</span><span class="n">birth_date</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Jour</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">players</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">,</span><span class="n">birth_date</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;2004&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT family_name,given_name,</span>
+<span class="s2">strftime(&quot;%Y&quot;,birth_date) as Année_de_naissance</span>
+<span class="s2">from players</span>
+<span class="s2">where Année_de_naissance =&#39;2001&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>family_name</th>
+      <th>given_name</th>
+      <th>Année_de_naissance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Afriyie</td>
+      <td>Daniel</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Al-Hadhrami</td>
+      <td>Naif</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Almada</td>
+      <td>Thiago</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Asiri</td>
+      <td>Haitham</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Bella-Kotchap</td>
+      <td>Armel</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Ben Slimane</td>
+      <td>Anis</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Caicedo</td>
+      <td>Moisés</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Chacón</td>
+      <td>Daniel</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>De Ketelaere</td>
+      <td>Charles</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Eraković</td>
+      <td>Strahinja</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Ezzalzouli</td>
+      <td>Abde</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Fernández</td>
+      <td>Enzo</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>García</td>
+      <td>Eric</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Hernández</td>
+      <td>Anthony</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Ilić</td>
+      <td>Ivan</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Jackson</td>
+      <td>Nicolas</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Johnson</td>
+      <td>Brennan</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Kang-in</td>
+      <td>Lee</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Kubo</td>
+      <td>Takefusa</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Martinelli</td>
+      <td>Gabriel</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Mendy</td>
+      <td>Formose</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Meshaal</td>
+      <td>Mostafa</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Onana</td>
+      <td>Amadou</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Pacho</td>
+      <td>William</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Pavlović</td>
+      <td>Strahinja</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Pellistri</td>
+      <td>Facundo</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Ramos</td>
+      <td>Gonçalo</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Rodrygo</td>
+      <td>not applicable</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Saka</td>
+      <td>Bukayo</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Saliba</td>
+      <td>William</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Tilio</td>
+      <td>Marco</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Timber</td>
+      <td>Jurriën</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Ugarte</td>
+      <td>Manuel</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Williams</td>
+      <td>Neco</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Wooh</td>
+      <td>Christopher</td>
+      <td>2001</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Afficher les players dont le faimilly_name contient le caractère underscore ‘_’</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">players</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">family_name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%!_%&#39;</span><span class="w"> </span><span class="k">ESCAPE</span><span class="w"> </span><span class="s1">&#39;!&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT * FROM players</span>
+<span class="s2">WHERE family_name LIKE &#39;%/_%&#39; ESCAPE &#39;/&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>player_id</th>
+      <th>family_name</th>
+      <th>given_name</th>
+      <th>birth_date</th>
+      <th>goal_keeper</th>
+      <th>defender</th>
+      <th>midfielder</th>
+      <th>forward</th>
+      <th>count_tournaments</th>
+      <th>list_tournaments</th>
+      <th>player_wikipedia_link</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="operateurs-ensemblistes">
+<h3>Opérateurs Ensemblistes<a class="headerlink" href="#operateurs-ensemblistes" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="union">
+<h3>Union :<a class="headerlink" href="#union" title="Permalink to this heading">#</a></h3>
+<p>L’union de deux relations (tables) R et S de même schéma définit une relation T de même schéma qui contient tous les lignes de R, de S ou à la fois de R et S, en éliminant les lignes en doubles.</p>
+<p>Notation :</p>
+<p><span class="math notranslate nohighlight">\(T = R \cup S = \{ ligne | ligne \in \text{R ou ligne} \in S \}\)</span></p>
+<p><strong>Union :</strong></p>
+<p>Requête SQL :</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+<span class="k">UNION</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>UNION ALL</strong> permet de garder les répétitions lors de calcul de la réunion.</p>
+<p>Afficher les noms et prénoms, l’année de naissance des players dont l’année de naissance est 2004 ou 2003 en étulisant l’opérateur Union</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">family_name</span><span class="p">,</span><span class="n">given_name</span><span class="p">,</span><span class="w"></span>
+<span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">,</span><span class="n">birth_date</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Année</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">players</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">,</span><span class="n">birth_date</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;2004&#39;</span><span class="w"></span>
+<span class="k">UNION</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">family_name</span><span class="p">,</span><span class="n">given_name</span><span class="p">,</span><span class="w"></span>
+<span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">,</span><span class="n">birth_date</span><span class="p">)</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">players</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">,</span><span class="n">birth_date</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;2003&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT family_name,given_name,</span>
+<span class="s2">strftime(&#39;%Y&#39;,birth_date) as année</span>
+<span class="s2">FROM players</span>
+<span class="s2">WHERE strftime(&#39;%Y&#39;,birth_date)=&#39;2004&#39;</span>
+<span class="s2">UNION</span>
+<span class="s2">SELECT family_name,given_name,</span>
+<span class="s2">strftime(&#39;%Y&#39;,birth_date)</span>
+<span class="s2">FROM players</span>
+<span class="s2">WHERE strftime(&#39;%Y&#39;,birth_date)=&#39;2003&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>family_name</th>
+      <th>given_name</th>
+      <th>année</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Aguilera</td>
+      <td>Brandon</td>
+      <td>2003</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Balde</td>
+      <td>Alejandro</td>
+      <td>2003</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bellingham</td>
+      <td>Jude</td>
+      <td>2003</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bennette</td>
+      <td>Jewison</td>
+      <td>2004</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Debast</td>
+      <td>Zeno</td>
+      <td>2003</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>El Khannous</td>
+      <td>Bilal</td>
+      <td>2004</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Gavi</td>
+      <td>not applicable</td>
+      <td>2004</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Issahaku</td>
+      <td>Abdul Fatawu</td>
+      <td>2004</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Kuol</td>
+      <td>Garang</td>
+      <td>2004</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Mejbri</td>
+      <td>Hannibal</td>
+      <td>2003</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Moukoko</td>
+      <td>Youssoufa</td>
+      <td>2004</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Musiala</td>
+      <td>Jamal</td>
+      <td>2003</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Ngapandouetnbu</td>
+      <td>Simon</td>
+      <td>2003</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Silva</td>
+      <td>António</td>
+      <td>2003</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Simons</td>
+      <td>Xavi</td>
+      <td>2003</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="lintersection">
+<h3>L’intersection<a class="headerlink" href="#lintersection" title="Permalink to this heading">#</a></h3>
+<p>L’intersection de deux relations R et S de même schéma est une relation T
+de même schéma contenant les lignes appartenant à la fois à R et à S</p>
+<p>Notation :</p>
+<p><span class="math notranslate nohighlight">\(T = R \cap S= \{ligne |\,\,\, ligne \in R\quad et\,\,\, ligne \,\,\in S \}\)</span></p>
+<p><strong>Intersection :</strong></p>
+<p>Requête SQL :</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+<span class="k">INTERSECT</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Exemple</strong>
+Soit le modèle relationnel suivant:</p>
+<p><strong>matches(
+tournament_id TEXT NOT NULL,<br />
+match_id TEXT NOT NULL,<br />
+result TEXT,
+match_name TXT
+);</strong>\</p>
+<p>Selectionner tous les matches joués entre le maroc et le portugal</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select match_name from matches</span>
+<span class="s2">where match_name like &quot;%Morocco%&quot; and match_name like &quot;%Portugal%&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>match_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Portugal v Morocco</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Portugal v Morocco</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Morocco v Portugal</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select match_name from matches</span>
+<span class="s2">where match_name like &quot;%Morocco%&quot; </span>
+<span class="s2">intersect </span>
+<span class="s2">select match_name from matches</span>
+<span class="s2">where match_name like &quot;%Portugal%&quot; </span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>match_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Morocco v Portugal</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Portugal v Morocco</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span><span class="w"> </span><span class="n">tournament_id</span><span class="p">,</span><span class="n">match_name</span><span class="p">,</span><span class="k">result</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">matches</span><span class="w"></span>
+<span class="k">where</span><span class="w"> </span><span class="n">match_name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%Morocco%&#39;</span><span class="w"></span>
+<span class="k">Intersect</span><span class="w"> </span>
+<span class="k">select</span><span class="w"> </span><span class="n">tournament_id</span><span class="p">,</span><span class="n">match_name</span><span class="p">,</span><span class="k">result</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">matches</span><span class="w"></span>
+<span class="k">where</span><span class="w"> </span><span class="n">match_name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%Portugal%&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select tournament_id,match_name,result from matches</span>
+<span class="s2">where match_name like &#39;%Morocco%&#39;</span>
+<span class="s2">Intersect </span>
+<span class="s2">select tournament_id,match_name,result from matches</span>
+<span class="s2">where match_name like &#39;%Portugal%&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tournament_id</th>
+      <th>match_name</th>
+      <th>result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WC-1986</td>
+      <td>Portugal v Morocco</td>
+      <td>away team win</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WC-2018</td>
+      <td>Portugal v Morocco</td>
+      <td>home team win</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>WC-2022</td>
+      <td>Morocco v Portugal</td>
+      <td>home team win</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="la-difference">
+<h3>La différence<a class="headerlink" href="#la-difference" title="Permalink to this heading">#</a></h3>
+<p>La différence de deux relations R et S (dans cet ordre) de même schéma
+est une relation T de même schéma contenant l’ensemble des lignes
+appartenant à R et n’appartenant pas à S.</p>
+<p>Notation :</p>
+<p><span class="math notranslate nohighlight">\(T = R - S= \{ligne |\,\,\, ligne \,\,\in R \,\,\,et\,\,\, ligne \,\,\notin S \}\)</span></p>
+<p><strong>Différence :</strong></p>
+<p>Requête SQL :</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+<span class="k">EXCEPT</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Dans certains systèmes de gestion de base de données (SGBD) on trouve l’opérateur <strong>MINUS</strong> au lieu <strong>d’EXCEPT</strong>.</p>
+<p>Selectionner les équipes(team_id) qui n’ont jamis pu se qualifier au coupe du monde apres l’année 2000</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">team_id</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">teams</span><span class="w"></span>
+<span class="k">EXCEPT</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">team_id</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">qualified_teams</span><span class="w"></span>
+<span class="k">where</span><span class="w"> </span><span class="n">tournament_id</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%-20%&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select distinct team_id from teams</span>
+<span class="s2">EXCEPT</span>
+<span class="s2">select distinct team_id from qualified_teams</span>
+<span class="s2">where tournament_id like &#39;</span><span class="si">%-20%</span><span class="s2">&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>team_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>T-05</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>T-07</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>T-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>T-18</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>T-20</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>T-22</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>T-23</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>T-26</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>T-32</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>T-34</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>T-37</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>T-38</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>T-41</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>T-43</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>T-50</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>T-51</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>T-59</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>T-62</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>T-70</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>T-79</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>T-83</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>T-84</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>T-85</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;select team_id,team_name from (</span>
+<span class="s2">select distinct team_id as id from teams</span>
+<span class="s2">EXCEPT</span>
+<span class="s2">select distinct team_id from qualified_teams</span>
+<span class="s2">where tournament_id like &#39;</span><span class="si">%-20%</span><span class="s2">&#39;) join teams on teams.team_id=id</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>team_id</th>
+      <th>team_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>T-05</td>
+      <td>Austria</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>T-07</td>
+      <td>Bolivia</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>T-10</td>
+      <td>Bulgaria</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>T-18</td>
+      <td>Cuba</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>T-20</td>
+      <td>Czechoslovakia</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>T-22</td>
+      <td>Dutch East Indies</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>T-23</td>
+      <td>East Germany</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>T-26</td>
+      <td>El Salvador</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>T-32</td>
+      <td>Haiti</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>T-34</td>
+      <td>Hungary</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>T-37</td>
+      <td>Iraq</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>T-38</td>
+      <td>Israel</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>T-41</td>
+      <td>Jamaica</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>T-43</td>
+      <td>Kuwait</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>T-50</td>
+      <td>Northern Ireland</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>T-51</td>
+      <td>Norway</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>T-59</td>
+      <td>Romania</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>T-62</td>
+      <td>Scotland</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>T-70</td>
+      <td>Soviet Union</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>T-79</td>
+      <td>United Arab Emirates</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>T-83</td>
+      <td>West Germany</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>T-84</td>
+      <td>Yugoslavia</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>T-85</td>
+      <td>Zaire</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="le-produit-cartesien">
+<h3>Le produit cartésien<a class="headerlink" href="#le-produit-cartesien" title="Permalink to this heading">#</a></h3>
+<p>Le produit cartésien de deux relations R et S, de schéma quelconque, est
+une relation T dont :</p>
+<ul class="simple">
+<li><p>les colonnes sont la concaténation de ceux de R et S</p></li>
+<li><p>les lignes sont toutes les concaténations de chaque ligne de R à chaque ligne de S</p></li>
+</ul>
+<p>Notation :
+$<span class="math notranslate nohighlight">\(R \times S= \{(R1, ..., R_p,S1, ... , S_q)|(R1, ..., R_p)\in R \,\,\,et  \,\,\, (S1, ... , S_q) \in S\}\)</span>$</p>
+<p>Produit cartésien :</p>
+<p><strong>Requête SQL :</strong></p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">table1</span><span class="p">,</span><span class="n">table2</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Remarque :</strong><br />
+Si les deux tables ont des colonnes de même nom, alors chaque nom de
+colonne est préfixé par le nom de sa table</p>
+</section>
+<section id="renommage">
+<h3>Renommage<a class="headerlink" href="#renommage" title="Permalink to this heading">#</a></h3>
+<p>Il est possible d’utiliser des alias pour renommer temporairement une
+colonne ou une table.\</p>
+<p>Notation :</p>
+<p><span class="math notranslate nohighlight">\(\rho_{ R_1,...,R_p \rightarrow S_1,...,S_p} (R)\)</span> permet de renommer <span class="math notranslate nohighlight">\(R_1,...,R_p\)</span> en <span class="math notranslate nohighlight">\(S_1,...,S_p\)</span></p>
+<p><strong>Renommage des colonnes :</strong>
+Requête SQL :</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">R1</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">S1</span><span class="w"> </span><span class="p">,.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Ri</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">nomtable</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="n">Ou</span><span class="w"> </span><span class="n">bien</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">R1</span><span class="w"> </span><span class="n">S1</span><span class="w"> </span><span class="p">,.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Ri</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">nomtable</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="la-division">
+<h3>La Division<a class="headerlink" href="#la-division" title="Permalink to this heading">#</a></h3>
+<p>La division de deux tables R et S, sachant que R et S ont au moins une colonne commune, est une table T dont :</p>
+<ul class="simple">
+<li><p>les colonnes sont des colonnes de R qui n’appartiennent pas à S.</p></li>
+<li><p>les lignes sont les lignes qui réalisent dans R la combinaison avec toutes les lignes de S.</p></li>
+</ul>
+<p><strong>Notation :</strong></p>
+<div class="math notranslate nohighlight">
+\[T = R \div S= \{(A1, ..., A_p)|(\forall(B_1, ..., B_q)\in S) \,\,\,(A_1, ..., A_p,B1, ... , B_q) \in R\}\]</div>
+<p><strong>Division</strong></p>
+<p>Requête SQL :</p>
+<p>Il n’y a pas de commande en langage SQL pour faire la
+division de 2 relations.</p>
+</section>
+<section id="la-jointure">
+<h3>La Jointure<a class="headerlink" href="#la-jointure" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>La jointure de deux tables R et S selon une condition P est la table T contenant l’ensemble des lignes du produit cartésien R x S  satisfaisant la condition P.</p></li>
+<li><p>Cette condition est une proposition logique portant sur deux colonnes (en particulier, la clé primaire de l’une et la clé étrangère de l’autre) en utilisant des opérateurs de comparaison (<span class="math notranslate nohighlight">\(&lt;\)</span>, <span class="math notranslate nohighlight">\(&gt;\)</span>, <span class="math notranslate nohighlight">\(\leq\)</span>, <span class="math notranslate nohighlight">\(\geq\)</span>, <span class="math notranslate nohighlight">\(! =\)</span>, <span class="math notranslate nohighlight">\(=\)</span>, …).</p></li>
+</ul>
+<p>Notation <strong>jointure interne</strong>:</p>
+<div class="math notranslate nohighlight">
+\[T = R \underset{R.C_i=S.C_j}{\bowtie}S \]</div>
+<p><strong>Requête SQL :</strong></p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">colonne1</span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">colonne2</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="n">Ou</span><span class="w"> </span><span class="n">bien</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="n">S</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">colonne1</span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">colonne2</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Exemple</strong>
+Selectionner les équipes(team_name) qui appartienent à la confederations concacaf
+<img alt="" src="notebooks/SQL/images/link_conf_team.png" /></p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span><span class="w"> </span><span class="n">team_name</span><span class="w"></span>
+<span class="k">from</span><span class="w"> </span><span class="n">teams</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">confederations</span><span class="w"> </span>
+<span class="k">on</span><span class="w"> </span><span class="n">teams</span><span class="p">.</span><span class="n">confederation_id</span><span class="o">=</span><span class="n">confederations</span><span class="p">.</span><span class="n">confederation_id</span><span class="w"></span>
+<span class="k">where</span><span class="w"> </span><span class="n">confederation_code</span><span class="o">=</span><span class="s1">&#39;CAF&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select team_name</span>
+<span class="s2">from teams join confederations </span>
+<span class="s2">on teams.confederation_id=confederations.confederation_id</span>
+<span class="s2">where confederation_code=&#39;CAF&#39;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>team_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Algeria</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Angola</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Cameroon</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Egypt</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Ghana</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Ivory Coast</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Morocco</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Nigeria</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Senegal</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>South Africa</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Togo</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Tunisia</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Zaire</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/SQL"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Machine-Learning/KNN-Cours.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Algorithme KNN: Cours</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="SQL1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Algèbre Relationnelle Et Langage SQL</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Algèbre Relationnelle Et Langage SQL</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plan">Plan</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#une-relation-table">Une Relation (Table)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-projection">La Projection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suppression-des-doublons">Suppression des doublons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-selection">La sélection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sql-like">SQL LIKE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs-ensemblistes">Opérateurs Ensemblistes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#union">Union :</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lintersection">L’intersection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-difference">La différence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-produit-cartesien">Le produit cartésien</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renommage">Renommage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-division">La Division</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-jointure">La Jointure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By El Hadiq Zouhair
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

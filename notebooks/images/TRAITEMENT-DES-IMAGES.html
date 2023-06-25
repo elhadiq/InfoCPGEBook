@@ -1,0 +1,1425 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>TRAITEMENT DES IMAGES &#8212; Informatique en CPGE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/images/TRAITEMENT-DES-IMAGES';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Algorithme KNN: Cours" href="../Machine-Learning/KNN-Cours.html" />
+    <link rel="prev" title="Les algorithmes gloutons" href="../dynamicProgramming/glouton.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Arbres-binaires/Arbres.html">Arbres binaires</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ABR/ABR.html">Arbres Binaires de Recherche</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamicProgramming/ProgrammationDynamique.html">Programmation dynamique</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">TRAITEMENT DES IMAGES</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Machine-Learning/KNN-Cours.html">Algorithme KNN: Cours</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../SQL/SQL.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../SQL/SQL1.html">Algèbre Relationnelle Et Langage SQL</a></li>
+
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Lycee-Moulay-Youssef/InfoCPGE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/images/TRAITEMENT-DES-IMAGES.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/images/TRAITEMENT-DES-IMAGES.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>TRAITEMENT DES IMAGES</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristiques-dune-image">Caractéristiques d’une image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-pixels">Les pixels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-format-rgb">Le format RGB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transparence-et-canal-alpha">Transparence et Canal Alpha</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chargement-de-limage">Chargement de l’image</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#la-taille-de-l-image">La taille de l’image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#affichage-dune-image">Affichage d’une image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recadrer-l-image">Recadrer l’image</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-dune-image">Modification d’une image</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traitements-basiques-de-limage">Traitements basiques de l’image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inversion">Inversion</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ajouter-un-rectangle">Ajouter un réctangle</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retournement">Retournement</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#miroire">Miroire</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passage-en-niveaux-de-gris">Passage en niveaux de gris</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-du-contraste">Modification du contraste</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogramme-dune-image">Histogramme d’une image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seuillage-fixe">Seuillage fixe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-d-images">Rotation d’images</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-de-filtres">Application de filtres</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flou-ou-filtre-moyenneur">Flou ou Filtre moyenneur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detection-de-contours">Détection de contours</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#concolution-et-filtre-moyenneur">Concolution et filtre Moyenneur</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detection-des-contours">Détection des contours</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="traitement-des-images">
+<h1>TRAITEMENT DES IMAGES<a class="headerlink" href="#traitement-des-images" title="Permalink to this heading">#</a></h1>
+<section id="caracteristiques-dune-image">
+<h2>Caractéristiques d’une image<a class="headerlink" href="#caracteristiques-dune-image" title="Permalink to this heading">#</a></h2>
+<section id="les-pixels">
+<h3>Les pixels<a class="headerlink" href="#les-pixels" title="Permalink to this heading">#</a></h3>
+<p>Une image est un ensemble de pixels qui peuvent être définis comme des zones carrées identiques de dimensions (L × C). La couleur de chaque pixel est uniforme et l’aspect non granulaire d’une image n’est dû qu’au fait que la taille des pixels est très petite.<br />
+La figure ci-dessous donne un exemple d’image “binaire” représentant un A. <br />
+Il n’y a ici que deux couleurs : noir et blanc.<br />
+<img alt="pictures/A.png" src="../../_images/A.png" /></p>
+<p>Les images dites en « noir et blanc » sont en fait des images en dégradé de gris. <br />
+Elles peuvent aussi être représentées par des matrices : chaque élément de la matrice correspondra comme précédemment à un pixel, mais ces éléments seront des nombres entiers donnant l’intensité de gris voulue. <br />
+On utilise habituellement des nombres de 0 à 255, 0 pour le noir et 255 pour le blanc, soit <span class="math notranslate nohighlight">\(256 = 2^8\)</span> niveaux de gris, ce qui permet de coder un pixel par 8 bits.</p>
+<p>Les images en couleur sont représentées par trois matrices de taille identique, donnant l’intensité de Rouge, Vert, et Bleu pour chaque pixel. Cette méthode est désignée par le sigle RGB (Red, Green, Blue).<br />
+Les éléments de ces trois matrices sont encore des entiers de 0 à 255.
+Dans le système RGB, il y a donc <span class="math notranslate nohighlight">\(256^ 3 = 2^{24} = 16 777 216\)</span> teintes possibles pour chaque pixel.<br />
+L’image finale est obtenue en combinant les trois images. Ci-dessous le résultat final.<br />
+<img alt="pictures/reign_pic_breakdown.png" src="../../_images/reign_pic_breakdown.png" /></p>
+</section>
+<section id="le-format-rgb">
+<h3>Le format RGB<a class="headerlink" href="#le-format-rgb" title="Permalink to this heading">#</a></h3>
+<p>Une norme fréquemment utilisée pour les images numériques est la norme RGB (Red Green Blue). Ce qu’on appelle un pixel d’écran est composé de trois leds des trois couleurs RGB. Un pixel informatique est alors représenté sous la forme de trois valeurs numériques comprises entre 0 et 255, 0 représentant la led éteinte, et 255 la led totalement allumée. Ainsi :</p>
+<ul class="simple">
+<li><p>la couleur rouge est représentée par (255,0,0) ;</p></li>
+<li><p>la couleur verte est représentée par  (0,255,0);</p></li>
+<li><p>la couleur bleue est représentée par (0,0,255) ;</p></li>
+<li><p>la couleur fuchsia (violet) est représentée par (255,0,255) …</p></li>
+</ul>
+<p><img alt="pictures/three_d_array.png" src="../../_images/three_d_array.png" /></p>
+</section>
+<section id="transparence-et-canal-alpha">
+<h3>Transparence et Canal Alpha<a class="headerlink" href="#transparence-et-canal-alpha" title="Permalink to this heading">#</a></h3>
+<p>Pour certains types d’images, un quatrième octet est utilisé pour chaque pixel. Il s’agit du canal alpha, qui caractérise la transparence de ce pixel. Cette couche supplémentaire permet de superposer des images - par exemple dans un jeu vidéo un sprite pourra apparaître sur le fond, sans masquer la totalité sous la forme d’un carré.</p>
+<p>Cet octet supplémentaire est utilisé de la manière suivante :</p>
+<ul class="simple">
+<li><p>si il est à 255, le pixel est correctemnt affiché ;</p></li>
+<li><p>si il est à 0, le pixel est transparent.</p></li>
+</ul>
+<p>En informatique, une image en couleurs est constituée d’un ensemble de pixels colorés, arrangés en lignes et en colonnes. Chaque pixel est, généralement, constitué d’un mélange de trois couleurs : rouge, vert et bleu.<br />
+<img alt="pictures/rgb_model.png" src="../../_images/rgb_model.png" /></p>
+</section>
+<section id="chargement-de-limage">
+<h3>Chargement de l’image<a class="headerlink" href="#chargement-de-limage" title="Permalink to this heading">#</a></h3>
+<p>Nous allons utiliser le module image de matplotlib</p>
+<p>pour charger en mémoire une image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.image</span> <span class="k">as</span> <span class="nn">mpimg</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On peut procéder de la sorte pour charger une image en-nesyri.png qui se trouverait en répertoire local:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;pictures/en-nesyri.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="la-taille-de-l-image">
+<h4>La taille de l’image<a class="headerlink" href="#la-taille-de-l-image" title="Permalink to this heading">#</a></h4>
+<p>Si, dans un algorithme, il est besoin de connaître la taille de l’image, on rappelle que image.shape fournit un tuple de trois éléments, conprenant la hauteur de l’image, sa largeur, et le nombre de canaux de couleur (3, en principe).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(667, 1000, 3)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="affichage-dune-image">
+<h4>Affichage d’une image<a class="headerlink" href="#affichage-dune-image" title="Permalink to this heading">#</a></h4>
+<p>Pour afficher une image ayant trois canaux de couleur, il suffit de faire appel à plt.imshow:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f1f01f2a3d0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/80bd9c75a991fea37a701cdce864471999b61da10c946bd0442bee8ac12c3199.png" src="../../_images/80bd9c75a991fea37a701cdce864471999b61da10c946bd0442bee8ac12c3199.png" />
+</div>
+</div>
+<p>Ainsi, vous avez vos données dans un tableau numpy (soit en l’important, soit en le générant).<br />
+Affichons-le, Dans Matplotlib, cela est effectué à l’aide de la fonction imshow().<br />
+Ici, nous allons saisir l’objet plot. Cet objet vous permet de manipuler facilement le tracé à partir de l’invite.</p>
+<p>Python utilise un tableau à trois dimensions pour représenter l’image en couleur. Comme
+pour une matrice, le premier indice désigne la ligne, la seconde la colonne. Le troisième
+indice désigne le canal de couleur (dans l’ordre, rouge, vert et bleu).</p>
+</section>
+<section id="recadrer-l-image">
+<h4>Recadrer l’image<a class="headerlink" href="#recadrer-l-image" title="Permalink to this heading">#</a></h4>
+<p>pour selectionner une partie spécifique en peut utiliser le slicing offert par les objets ndarray de numpy, ainsi ce code permet par exemple de selectionner la partie visage du joeur Youssef En-nesyri.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">400</span><span class="p">,</span><span class="mi">200</span><span class="p">:</span><span class="mi">600</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f1f00b25d60&gt;
+</pre></div>
+</div>
+<img alt="../../_images/405f92ad1c14d79318a370ad191eab46034626e009e5fba6c30d94a0e5903c58.png" src="../../_images/405f92ad1c14d79318a370ad191eab46034626e009e5fba6c30d94a0e5903c58.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="modification-dune-image">
+<h3>Modification d’une image<a class="headerlink" href="#modification-dune-image" title="Permalink to this heading">#</a></h3>
+<p>On peut modifier la valeur correspondant à l’intensité d’une couleur d’un pixel par mutation de la case correspondante du tableau, par exemple de la sorte :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cette commande attribue, pour le pixel situé sur la ligne d’index 4 (la cinquième ligne), dans la colonne d’index 11, une intensité égale à 0.2 pour le canal d’index 2 (le troisième canal de couleur, donc, correspondant au bleu).
+désigne la couleur bleue du pixel situé à la cinquième ligne et à la douzième colonne (on rappelle que les indices débutent à 0).
+Chacune des valeurs est un entier sur 8 bits, entre 0 et 1. 0 représente l’absence de la couleur concernée, 1 le maximum.\
+Si les trois valeurs de couleur sont à 0, on obtient du noir. Si elles sont toutes les trois à 1, du blanc.\ Pour obtenir du rouge, il faut une valeur 1 pour la valeur rouge, et 0 pour les deux autres.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="traitements-basiques-de-limage">
+<h2>Traitements basiques de l’image<a class="headerlink" href="#traitements-basiques-de-limage" title="Permalink to this heading">#</a></h2>
+<p>Une petite fonction qui permet d’afficher deux images old et new</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">afficher_changement</span><span class="p">(</span><span class="n">old</span><span class="p">,</span><span class="n">new</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dans un premier temps, nous allons écrire quelques fonctions qui modifient une image, passée en argument de la fonction.<br />
+Comme les listes, les numpy.array et donc les images sont des objets mutables, que l’on peut directement  modifier dans les fonctions.<br />
+Les fonctions n’ont donc, en principe, pas besoin de retourner de résultat.</p>
+<section id="inversion">
+<h3>Inversion<a class="headerlink" href="#inversion" title="Permalink to this heading">#</a></h3>
+<p>L’inversion d’une image consiste à remplacer, pour chaque pixel et pour chaque canal de couleur, une valeur v par <span class="math notranslate nohighlight">\(1.0 − v\)</span> (ou <span class="math notranslate nohighlight">\(255 − v\)</span> si l’on travaillait avec des valeurs entières).
+Cela a pour effet de transformer le blanc en noir (et inversement), le rouge en cyan, le vert  en magenta, etc.</p>
+<p>Écrire une fonction Inverse(img) qui prend en argument une image et l’inverse, et tester son bon fonctionnement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inversion</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">-</span><span class="n">image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_negatif</span><span class="o">=</span><span class="n">inversion</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">negatif2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="o">-</span><span class="n">img</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">afficher_changement</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">image_negatif</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a843ae44beea4da810dd798bf54dc99488601e8d70b38048ec174d52bbe97aeb.png" src="../../_images/a843ae44beea4da810dd798bf54dc99488601e8d70b38048ec174d52bbe97aeb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">afficher_changement</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">negatif2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a843ae44beea4da810dd798bf54dc99488601e8d70b38048ec174d52bbe97aeb.png" src="../../_images/a843ae44beea4da810dd798bf54dc99488601e8d70b38048ec174d52bbe97aeb.png" />
+</div>
+</div>
+<section id="ajouter-un-rectangle">
+<h4>Ajouter un réctangle<a class="headerlink" href="#ajouter-un-rectangle" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>1.a Écrire une fonction AjouteRectangle(img) qui prend en argument une image, et modifie cette image de façon à ajouter sur celle-ci un rectangle vert de hauteur 80 et de largeur 160 dont le coin en haut à gauche se trouve à la ligne 50 et à la colonne 100.</p></li>
+<li><p>1.b Charger une image, utiliser la fonction précédente, et afficher le résultat à l’écran.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">border</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">newimage</span><span class="o">=</span><span class="n">copy</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">blue</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">newimage</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">m</span><span class="p">,:]</span><span class="o">=</span><span class="n">blue</span>
+    <span class="n">newimage</span><span class="p">[</span><span class="o">-</span><span class="n">m</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span><span class="o">=</span><span class="n">blue</span>
+    <span class="n">newimage</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">m</span><span class="p">]</span><span class="o">=</span><span class="n">blue</span>
+    <span class="n">newimage</span><span class="p">[:,</span><span class="o">-</span><span class="n">m</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">blue</span>
+    <span class="k">return</span> <span class="n">newimage</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imageborder</span><span class="o">=</span><span class="n">border</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">afficher_changement</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">imageborder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1ab630b7da25349fc2ebd91ae38ecc0ca5486dbd3e4c141ee36f3c6570a06c57.png" src="../../_images/1ab630b7da25349fc2ebd91ae38ecc0ca5486dbd3e4c141ee36f3c6570a06c57.png" />
+</div>
+</div>
+<p>Écrire une fonction AjouteDisque(img) qui prend en argument une image, et modifie cette image de façon a ajouter sur celle-ci un disque noire de rayon égale à la moitie de minimaum entre le nombre des lignes et le nombre des colones dont le centre se trouve au centre de l’image, puis tester son bon fonctionnement</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">norm2</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">j</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cercle</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">ep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">mx</span><span class="p">,</span><span class="n">my</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">//</span><span class="mi">2</span>
+    <span class="n">radious</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span><span class="n">my</span><span class="p">)</span>
+    <span class="n">epaiseur</span><span class="o">=</span><span class="n">ep</span><span class="o">*</span><span class="n">radious</span>
+    <span class="n">blue</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="o">/</span><span class="mi">255</span><span class="p">])</span>
+    <span class="n">new_image</span><span class="o">=</span><span class="n">copy</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">masque</span><span class="o">=</span><span class="p">[[</span><span class="n">norm2</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">mx</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="n">my</span><span class="p">)</span><span class="o">&lt;</span><span class="n">radious</span> <span class="ow">and</span> <span class="n">norm2</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">mx</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="n">my</span><span class="p">)</span><span class="o">&gt;</span><span class="n">radious</span><span class="o">-</span><span class="n">epaiseur</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="p">))]</span>
+    <span class="n">new_image</span><span class="p">[</span><span class="n">masque</span><span class="p">]</span><span class="o">=</span><span class="n">blue</span>
+    <span class="k">return</span> <span class="n">new_image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_image</span><span class="o">=</span><span class="n">cercle</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">new_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f1f00093340&gt;
+</pre></div>
+</div>
+<img alt="../../_images/a736e02f890a2b1c8364097fca287440e8a2c41562148901cbf102dafffa714e.png" src="../../_images/a736e02f890a2b1c8364097fca287440e8a2c41562148901cbf102dafffa714e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">afficher_changement</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">new_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d4eaa2d087b687e1f6d4d09d1ff42c3b5e62f747320b798c0ae221fd87dd0593.png" src="../../_images/d4eaa2d087b687e1f6d4d09d1ff42c3b5e62f747320b798c0ae221fd87dd0593.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="retournement">
+<h3>Retournement<a class="headerlink" href="#retournement" title="Permalink to this heading">#</a></h3>
+<p>Le retournement d’une image consiste à effectuer une symétrie autour de la ligne médiane de l’image.<br />
+Les pixels de la dernière ligne se retrouvent sur la première ligne (et inversement), et ainsi de suite.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">horizental_sym</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">newimage</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">((</span><span class="nb">reversed</span><span class="p">(</span><span class="n">image</span><span class="p">))))</span>
+    <span class="k">return</span> <span class="n">newimage</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hsym</span><span class="o">=</span><span class="n">horizental_sym</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">afficher_changement</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">hsym</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/67c69a5fcd3df7fe766cfabd0465fc1a6e632f54de9af1920565bb57110524a2.png" src="../../_images/67c69a5fcd3df7fe766cfabd0465fc1a6e632f54de9af1920565bb57110524a2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">retournemet</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">n</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">l1</span><span class="o">=</span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">image</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">copy</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">]),</span><span class="n">copy</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="c1">#essayer d&#39;enlever copy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;pictures/en-nesyri.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retournemet</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f1f01ea4070&gt;
+</pre></div>
+</div>
+<img alt="../../_images/58f0a143cc8aad60d3d82d3fccf3251743ab8dfce38ee8e464310e6679f15b42.png" src="../../_images/58f0a143cc8aad60d3d82d3fccf3251743ab8dfce38ee8e464310e6679f15b42.png" />
+</div>
+</div>
+<section id="miroire">
+<h4>Miroire<a class="headerlink" href="#miroire" title="Permalink to this heading">#</a></h4>
+<p>Ecrire une fonction Miroire(img) qui renvoie l’image miroire de img.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;pictures/en-nesyri.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">miroir</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">image</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mirror</span><span class="o">=</span><span class="n">miroir</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">afficher_changement</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">mirror</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/36028594b07d3905c83296cfea1ed04447c1f1a6b3a6c380e6a708e9d877bd1a.png" src="../../_images/36028594b07d3905c83296cfea1ed04447c1f1a6b3a6c380e6a708e9d877bd1a.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="passage-en-niveaux-de-gris">
+<h3>Passage en niveaux de gris<a class="headerlink" href="#passage-en-niveaux-de-gris" title="Permalink to this heading">#</a></h3>
+<p>Pour obtenir une image en niveaux de gris, c’est-à-dire dépourvue de couleur, il suffit que les valeurs des trois canaux de couleur de chaque pixel soient égales.<br />
+Attention, cela reste une image en couleur, même si tous les pixels sont gris (on n’aura donc pas besoin de l’argument cmap=”gray” ici).</p>
+<p>Pour convertir une image couleur en niveaux de gris, il faut donc remplacer les valeurs
+des trois canaux par une unique valeur représentant la luminosité du pixel.</p>
+<p>Il existe plusieurs façons de calculer cette valeur, selon l’image que l’on souhaite obtenir à l’arrivée. Lorsque l’on souhaite se rapprocher le plus possible de la vision humaine, on peut utiliser la formule suivante (qui privilégie le vert car c’est la couleur à laquelle notre œil est le plus sensible) :</p>
+<div class="math notranslate nohighlight">
+\[0.2126 × Rouge + 0.7152 × Vert + 0.0722 × Bleu\]</div>
+<p>On remarquera que la somme des trois coefficients est égale à 1.0, ce qui permet de
+s’assurer que le résultat ne dépassera pas 1.0, et atteindra la valeur de 1.0 pour un pixel où les trois composantes de couleur égales à 1.0.</p>
+<p>Écrire une fonction Monochrome(img) qui prend en argument une image en couleurs
+et la transforme en une image en niveaux de gris selon la formule précédente, et vérifier
+son bon fonctionnement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Monochrome</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">newimage</span><span class="o">=</span><span class="mi">0</span><span class="o">*</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span> <span class="o">*</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span> <span class="o">*</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">newimage</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">triplet</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">l</span><span class="p">]</span><span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">image</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_grise</span><span class="o">=</span><span class="n">triplet</span><span class="p">(</span><span class="n">Monochrome</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">afficher_changement</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">image_grise</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8ecf8ee52fae9a64addbedb2dfbb806a2187259fe150f33e8c1e9d7db252d663.png" src="../../_images/8ecf8ee52fae9a64addbedb2dfbb806a2187259fe150f33e8c1e9d7db252d663.png" />
+</div>
+</div>
+<section id="modification-du-contraste">
+<h4>Modification du contraste<a class="headerlink" href="#modification-du-contraste" title="Permalink to this heading">#</a></h4>
+<p>Certaines images peuvent être surexposées (trop claire, les valeurs des différents canaux de couleur étant toutes grandes), sous-exposée (même chose avec de petites valeurs), ou peu contrastée (toutes les valeurs sont proches).
+Corriger le contraste d’une image consiste à modifier la répartition des valeurs entre 0.0 et 1.0 dans chacun des canaux. Cela consiste à appliquer, pour chaque canal de chaque pixel, une fonction définie de la sorte :</p>
+<ul class="simple">
+<li><p>si la valeur v est inférieure à vmin, on la remplace par 0.0 ;</p></li>
+<li><p>si la valeur v est supérieure à vmax, on la remplace par 1.0 ;</p></li>
+<li><p>sinon, on remplace la valeur v par (v − vmin)/(vmax − vmin).</p></li>
+</ul>
+<p>On supposera, par simplicité, que l’on utilise la même formule pour chacun des trois canaux de couleurs et pour chacun des pixels. Il est fréquent d’utiliser des fonctions différentes pour chaque couleur, ce qui permet de corriger la teinte d’une image (par exemple une image rougie car prise sous un éclairage artificiel). Il arrive parfois que l’on utilise des fonctions différentes selon la zone de l’image, par exemple lorsque l’on veut obtenir un effet « HDR » (haute dynamique). Cela permet de ne pas avoir, sur une même image, des zones sous-exposées et des zones sur-exposées, ce qui est fréquemment le cas pour les images prises à l’extérieur.</p>
+<p>Écrire une fonction AugmenteContraste(img, vmin, vmax) qui modifie le contraste d’une image, et vérifier son bon fonctionnement.<br />
+On pourra choisir par exemple comme paramètres vmin = 0.2 et vmax = 0.8.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">augmentContrast</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">vmin</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span><span class="n">vmax</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">v</span><span class="o">&lt;</span><span class="n">vmin</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">v</span><span class="o">&gt;</span><span class="n">vmax</span> <span class="k">else</span> <span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="n">vmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">vmax</span><span class="o">-</span><span class="n">vmin</span><span class="p">)</span>  <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">img</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_contrast</span><span class="o">=</span><span class="n">augmentContrast</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">afficher_changement</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">image_contrast</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/96b252879335fe119ca1579b284ea9f03ae900d5236538a88429b0c86545a8cb.png" src="../../_images/96b252879335fe119ca1579b284ea9f03ae900d5236538a88429b0c86545a8cb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">red</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">newimage</span><span class="o">=</span><span class="n">copy</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">newimage</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">:]</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">return</span> <span class="n">newimage</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">redimage</span><span class="o">=</span><span class="n">red</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">afficher_changement</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">redimage</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4f57c30dc85601e8f1312337e5f934e78cc3754c97d20134c3d1f7a189605405.png" src="../../_images/4f57c30dc85601e8f1312337e5f934e78cc3754c97d20134c3d1f7a189605405.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="histogramme-dune-image">
+<h3>Histogramme d’une image<a class="headerlink" href="#histogramme-dune-image" title="Permalink to this heading">#</a></h3>
+<p>L’histogramme d’une image est le graphique qui représente le nombre de pixels existant pour chaque valeur. Calculer l’histogramme de l’image en niveaux de gris, c’est en d’autres termes compter combien il y a de pixels pour chaque nuance de gris.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">histogram</span><span class="p">(</span><span class="n">image_grise</span><span class="p">):</span>
+    <span class="n">histo</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">image_grise</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">histo</span><span class="p">:</span>
+                <span class="n">histo</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                 <span class="n">histo</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">histo</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image2</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;pictures/Lenna.png&quot;</span><span class="p">)</span>
+<span class="n">image_grise2</span><span class="o">=</span><span class="n">Monochrome</span><span class="p">(</span><span class="n">image2</span><span class="p">)</span>
+<span class="n">histo2</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">histogram</span><span class="p">(</span><span class="n">image_grise2</span><span class="p">))</span>
+<span class="n">pixels</span><span class="p">,</span><span class="n">occurences</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">histo2</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transp</span><span class="o">=</span><span class="n">image_grise</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pixels</span><span class="p">,</span><span class="n">occurences</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f1f000d4670&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/058651f30f9700b37064668d1d5269579bcbe88ab2ede302295a3c4561642f34.png" src="../../_images/058651f30f9700b37064668d1d5269579bcbe88ab2ede302295a3c4561642f34.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gris</span><span class="o">=</span><span class="n">Monochrome</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">histo1</span><span class="o">=</span><span class="n">histogram</span><span class="p">(</span><span class="n">gris</span><span class="p">)</span>
+<span class="n">histo1</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">histo1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="p">,</span><span class="n">v</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">histo1</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f1f001acb50&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/ba406ab6beb1edda9d2c96372220bebedd5e5558332626b2147f3a081e4b6166.png" src="../../_images/ba406ab6beb1edda9d2c96372220bebedd5e5558332626b2147f3a081e4b6166.png" />
+</div>
+</div>
+</section>
+<section id="seuillage-fixe">
+<h3>Seuillage fixe<a class="headerlink" href="#seuillage-fixe" title="Permalink to this heading">#</a></h3>
+<p>Le seuillage est un traitement qui permet de selectionner les informations significatives dans une image, ce traitement nécissite le réglage d’un seuil <strong>S</strong>,</p>
+<ul class="simple">
+<li><p>Si la valeur d’un pixel Im[i,j] est inférieur au seuil S, alors la valeur de ce pixel est rémplacé  par 0</p></li>
+<li><p>Sinon la valeur de ce pixel est remplacé par 1
+Ainsi , on obtient une image en noir et blanc sans niveau de gris</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">seuillage</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">S</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="n">new_image</span><span class="o">=</span><span class="n">copy</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_image</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_image</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+            <span class="n">new_image</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span> <span class="k">if</span> <span class="n">new_image</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">S</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">new_image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seuillé</span><span class="o">=</span><span class="n">triplet</span><span class="p">(</span><span class="n">seuillage</span><span class="p">(</span><span class="n">image_grise</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">afficher_changement</span><span class="p">(</span><span class="n">image_grise</span><span class="p">,</span><span class="n">seuillé</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/14a55f5ed8f8cc16cbeb7fbddd6335fdfdccd4fabc4bc3bf55ea65d39301761b.png" src="../../_images/14a55f5ed8f8cc16cbeb7fbddd6335fdfdccd4fabc4bc3bf55ea65d39301761b.png" />
+</div>
+</div>
+</section>
+<section id="rotation-d-images">
+<h3>Rotation d’images<a class="headerlink" href="#rotation-d-images" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="n">centre</span><span class="o">=</span><span class="kc">None</span><span class="p">,):</span>
+    <span class="n">l</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">_</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">if</span> <span class="n">centre</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">centre</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">l</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">//</span><span class="mi">2</span><span class="p">],)</span>
+    <span class="n">new_coordinates</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">l</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
+    <span class="n">angle_rad</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    <span class="n">rotation_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">),</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)],[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)]])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+            <span class="n">new_coordinates</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">centre</span><span class="o">+</span><span class="n">rotation_matrix</span><span class="o">@</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span><span class="o">-</span><span class="n">centre</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">new_image</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">m</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+            <span class="n">ii</span><span class="p">,</span><span class="n">jj</span><span class="o">=</span><span class="n">new_coordinates</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">new_image</span><span class="p">[</span><span class="n">ii</span><span class="p">,</span><span class="n">jj</span><span class="p">]</span><span class="o">=</span><span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">new_image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rotate_image</span><span class="o">=</span><span class="n">rotate</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">afficher_changement</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">rotate_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/17e16146f4484ebc30bd0cd698276206d9a1861a3821561c1e0b5d3c92a1df43.png" src="../../_images/17e16146f4484ebc30bd0cd698276206d9a1861a3821561c1e0b5d3c92a1df43.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="application-de-filtres">
+<h2>Application de filtres<a class="headerlink" href="#application-de-filtres" title="Permalink to this heading">#</a></h2>
+<p><img alt="pictures/convolution.gif" src="../../_images/convolution.gif" /></p>
+<p>Un filtre, de manière générale, est une boîte noire qui transforme un signal d’entrée en un signal de sortie. <br />
+Ce signal d’entrée peut être un signal ID (tension dépendant du temps), 2D (une image: la valeur du pixel dépend de sa position selon x et y) ou autre. Le signal peut être continu (ses valeurs sont repérées par un paramètre qui varie continûment, comme le temps, c’est le cas de la tension u(t) par exemple) ou discret (ses valeurs peuvent être dénombrées, c’est le cas d’un signal numérique).</p>
+<p>Nous avons vu beaucoup de traitements qui s’appliquaient séparément sur chaques
+pixels.<br />
+Mais pour obtenir une gamme plus large d’effets, on peut envisager que les nouvelles couleurs d’un pixel dépendent non seulement des anciennes couleurs de ce pixel, mais
+également des pixels voisins.</p>
+<p>Dans cette situation, il n’est pas possible de modifier directement l’image (pourquoi ?)<br />
+Il faut donc créer une nouvelle image vide, dont on pourra ensuite fixer la couleur de chaque pixel sans toucher à l’image originale.</p>
+<p>Les fonctions suivantes vont donc retourner une nouvelle image qui sera le résultat du
+calcul souhaité, au contraire des fonctions précédentes qui modifiaient leur argument.</p>
+<section id="flou-ou-filtre-moyenneur">
+<h3>Flou ou Filtre moyenneur<a class="headerlink" href="#flou-ou-filtre-moyenneur" title="Permalink to this heading">#</a></h3>
+<p>Le filtre moyenneur est une opération de traitement d’images utilisée pour réduire le bruit dans une image et/ou flouter une image.</p>
+<p>Le filtre moyenneur fait parti de la catégorie des filtres d’images locaux car pour calculer la nouvelle valeur d’un pixel, il regarde la valeur des pixels proches<br />
+Concrètement, la valeur filtrée d’un pixel p est égale à la moyenne des valeurs des pixels proches de p.<br />
+En général, on définit les « pixels proches de p » comme l’ensemble de pixels contenus dans un carré de largeur k centré sur p :</p>
+<p>Pour appliquer un flou à l’image, on remplace chaque couleur de chaque pixel par une
+moyenne des couleurs des neufs pixels entourant le pixel considéré.</p>
+<ol class="arabic simple">
+<li><p>Écrire une fonction Floute(img) qui prend en entrée une image img et retourne
+une nouvelle image correspondant à un flou de l’image originale, et vérifier son bon
+fonctionnement. On réfléchira à ce qu’il est possible de faire sur les bords de l’image.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vegeta_image</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;pictures/vegeta.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flou</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">flou</span><span class="o">=</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span><span class="mi">2</span><span class="p">:]</span><span class="o">+</span><span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">:,:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span>\
+    <span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">:]</span><span class="o">+</span><span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span>\
+    <span class="n">image</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">:]</span><span class="o">+</span><span class="n">image</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">image</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="mi">9</span>
+    <span class="k">return</span> <span class="n">flou</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flou_image</span><span class="o">=</span><span class="n">flou</span><span class="p">(</span><span class="n">vegeta_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">afficher_changement</span><span class="p">(</span><span class="n">vegeta_image</span><span class="p">,</span><span class="n">flou_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/94e12d7597fd6b381467cc94be7d3ed67a09c93c8b0ffc2fd5b7de4d04494508.png" src="../../_images/94e12d7597fd6b381467cc94be7d3ed67a09c93c8b0ffc2fd5b7de4d04494508.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flou_loops</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">newimage</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">l</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">_</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">newimage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mi">9</span>
+    <span class="k">return</span> <span class="n">newimage</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image2_flou</span><span class="o">=</span><span class="n">flou_loops</span><span class="p">(</span><span class="n">vegeta_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">afficher_changement</span><span class="p">(</span><span class="n">vegeta_image</span><span class="p">,</span><span class="n">image2_flou</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6c432dd78a606d821f33fd01b0852c73c873528a3fe9ad8bf357cbbdf5e108f4.png" src="../../_images/6c432dd78a606d821f33fd01b0852c73c873528a3fe9ad8bf357cbbdf5e108f4.png" />
+</div>
+</div>
+</section>
+<section id="detection-de-contours">
+<h3>Détection de contours<a class="headerlink" href="#detection-de-contours" title="Permalink to this heading">#</a></h3>
+<p>Un contour, dans une image, est une zone de fortes variations des valeurs: si on pense à la
+photographie d’un poster sombre sur un mur blanc, le contour sera l’endroit où l’on passe
+du sombre au blanc. Détecter des contours est une opération importante, c’est la première étape vers des opérations de comptage automatisé, de reconnaissance de visages, etc. C’est une opération relativement compliquée dont nous allons voir ci-après quelques bases.</p>
+<p>Il est possible de détecter les contours d’une image en déterminant, pour chaque pixel, la norme du gradient en ce point. En effet, un gradient élevé correspond à une brusque variation de la luminosité ou de la couleur, ce que l’on trouve en général au bord des objets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convolution</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">noyeau</span><span class="p">):</span>
+    <span class="n">nl</span><span class="p">,</span><span class="n">nc</span><span class="o">=</span><span class="n">noyeau</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">l</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">image_augmentée</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">l</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">+</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">image_augmentée</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">image</span>
+    <span class="n">newimage</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+            <span class="n">newimage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">noyeau</span><span class="o">*</span><span class="n">image_augmentée</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">3</span><span class="p">])))</span>
+    <span class="k">return</span> <span class="n">newimage</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="concolution-et-filtre-moyenneur">
+<h4>Concolution et filtre Moyenneur<a class="headerlink" href="#concolution-et-filtre-moyenneur" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">moyenne</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span><span class="o">/</span><span class="mi">9</span>
+<span class="n">gris</span><span class="o">=</span><span class="n">Monochrome</span><span class="p">(</span><span class="n">vegeta_image</span><span class="p">)</span>
+<span class="n">fl</span><span class="o">=</span><span class="n">convolution</span><span class="p">(</span><span class="n">gris</span><span class="p">,</span><span class="n">moyenne</span><span class="p">)</span>
+<span class="n">fl</span><span class="o">=</span><span class="n">triplet</span><span class="p">(</span><span class="n">fl</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">fl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f1f0029b8e0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/315057b30473df947a4ce8b853b7f6a3fae3e30cc4ab4f0a84b1f58901bd54c7.png" src="../../_images/315057b30473df947a4ce8b853b7f6a3fae3e30cc4ab4f0a84b1f58901bd54c7.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="detection-des-contours">
+<h3>Détection des contours<a class="headerlink" href="#detection-des-contours" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gris</span><span class="o">=</span><span class="n">triplet</span><span class="p">(</span><span class="n">Monochrome</span><span class="p">(</span><span class="n">vegeta_image</span><span class="p">))</span>
+<span class="n">gris</span><span class="o">=</span><span class="n">gris</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">fl</span><span class="o">=</span><span class="n">convolution</span><span class="p">(</span><span class="n">gris</span><span class="p">,</span><span class="n">diff</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">fl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f1f000c95b0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/6acdc91f87f2ea51ae6cdbea1ce34314708b262aaa53bd18c53dd43a80890cf8.png" src="../../_images/6acdc91f87f2ea51ae6cdbea1ce34314708b262aaa53bd18c53dd43a80890cf8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sobel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">sbl</span><span class="o">=</span><span class="n">convolution</span><span class="p">(</span><span class="n">gris</span><span class="p">,</span><span class="n">sobel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sbl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f1efaf4bfd0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/b4afb2ca858a46ec5ae7f05044121ff37e3b8c187c320f0f0c0e94d4cffea48c.png" src="../../_images/b4afb2ca858a46ec5ae7f05044121ff37e3b8c187c320f0f0c0e94d4cffea48c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sobel2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">sbl2</span><span class="o">=</span><span class="n">convolution</span><span class="p">(</span><span class="n">gris</span><span class="p">,</span><span class="n">sobel2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sbl2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f1f0012e310&gt;
+</pre></div>
+</div>
+<img alt="../../_images/8a3d9d162b4e56ae4c5d27d6675e7851f9998030caae17b212ba2eff75a2d7cf.png" src="../../_images/8a3d9d162b4e56ae4c5d27d6675e7851f9998030caae17b212ba2eff75a2d7cf.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/images"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../dynamicProgramming/glouton.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Les algorithmes gloutons</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Machine-Learning/KNN-Cours.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Algorithme KNN: Cours</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristiques-dune-image">Caractéristiques d’une image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-pixels">Les pixels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-format-rgb">Le format RGB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transparence-et-canal-alpha">Transparence et Canal Alpha</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chargement-de-limage">Chargement de l’image</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#la-taille-de-l-image">La taille de l’image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#affichage-dune-image">Affichage d’une image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recadrer-l-image">Recadrer l’image</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-dune-image">Modification d’une image</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traitements-basiques-de-limage">Traitements basiques de l’image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inversion">Inversion</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ajouter-un-rectangle">Ajouter un réctangle</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retournement">Retournement</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#miroire">Miroire</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passage-en-niveaux-de-gris">Passage en niveaux de gris</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-du-contraste">Modification du contraste</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogramme-dune-image">Histogramme d’une image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seuillage-fixe">Seuillage fixe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-d-images">Rotation d’images</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-de-filtres">Application de filtres</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flou-ou-filtre-moyenneur">Flou ou Filtre moyenneur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detection-de-contours">Détection de contours</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#concolution-et-filtre-moyenneur">Concolution et filtre Moyenneur</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detection-des-contours">Détection des contours</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By El Hadiq Zouhair
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
